@@ -5,7 +5,7 @@ import React, {useState} from 'react';
 
 function Header(){
 
-    const [navOpen, setNavOpen] = useState(true);
+    const [navOpen, setNavOpen] = useState(false);
 
     const openNav = ()=>{
         setNavOpen(true);
