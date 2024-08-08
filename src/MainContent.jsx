@@ -1,9 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
-function MainContent(){
+function MainContent() {
+    const [userId, setUserId] = useState(null);
+
+    useEffect(() => {
+        const storedUserId = localStorage.getItem('userId');
+        setUserId(storedUserId);
+    }, []);
 
     const [searchInput, setSearchInput] = useState('');
-    const[filteredRows, setFilteredRows] = useState([]);
+    const [filteredRows, setFilteredRows] = useState([]);
 
     const data = [
         {
@@ -29,70 +35,74 @@ function MainContent(){
             joiningDate: '05/02/2019',
             leavingPort: 'HONG KONG',
             leavingDate: '04/09/2019'
-          }
+        }
     ];
 
-    useEffect(()=>{
+    useEffect(() => {
         const filter = searchInput.toUpperCase();
-        const filtered = data.filter((row)=>{
+        const filtered = data.filter((row) => {
             const vesselName = row.vesselName.toUpperCase();
             return vesselName.includes(filter);
         }
-    );
-    setFilteredRows(filtered);
+        );
+        setFilteredRows(filtered);
     }, [searchInput]);
 
-    const handleSearchChange = (event)=>{
+    const handleSearchChange = (event) => {
         setSearchInput(event.target.value);
     };
 
 
-    return(
+    return (
         <main className="table">
             <section className="table-header">
-                <h1>Your Voyages</h1>
+                {userId ? (
+                    <h1>Welcome, {userId} - Your Voyages</h1>
+                ) : (
+                    <h1>Your Voyages</h1>
+                )}
                 <div className="box">
-                    <input type="text" id="searchInput" placeholder="Search by Vessel Name" value={searchInput} onChange={handleSearchChange}/>
+                    <input type="text" id="searchInput" placeholder="Search by Vessel Name" value={searchInput} onChange={handleSearchChange} />
                     <a href="#"><i className="fas fa-search"></i></a>
                 </div>
             </section>
             <section className="table-body">
                 <table id="voyageTable">
                     <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Vessel name</th>
-                        <th>Vessel type</th>
-                        <th>Vessel flag</th>
-                        <th>IMO number</th>
-                        <th>Rank</th>
-                        <th>Joining port</th>
-                        <th>Joining date</th>
-                        <th>Leaving port</th>
-                        <th>Leaving date</th>
-                    </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>Vessel name</th>
+                            <th>Vessel type</th>
+                            <th>Vessel flag</th>
+                            <th>IMO number</th>
+                            <th>Rank</th>
+                            <th>Joining port</th>
+                            <th>Joining date</th>
+                            <th>Leaving port</th>
+                            <th>Leaving date</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {filteredRows.map((row, index) => (
-              <tr key={index}>
-                <td>{row.id}</td>
-                <td>{row.vesselName}</td>
-                <td>{row.vesselType}</td>
-                <td>{row.vesselFlag}</td>
-                <td>{row.imoNumber}</td>
-                <td>
-                  <p className={`rank ${row.rank.split(' ')[0].toLowerCase()}`}>
-                    {row.rank}
-                  </p>
-                </td>
-                <td>{row.joiningPort}</td>
-                <td>{row.joiningDate}</td>
-                <td>{row.leavingPort}</td>
-                <td>{row.leavingDate}</td>
-              </tr>
-            ))}
-                    
-                </tbody>
+                        {filteredRows.map((row, index) => (
+                            <tr key={index}>
+                                <td>{row.id}</td>
+                                <td>{row.vesselName}</td>
+                                <td>{row.vesselType}</td>
+                                <td>{row.vesselFlag}</td>
+                                <td>{row.imoNumber}</td>
+                                <td>
+                                    <p className={`rank ${row.rank.split(' ')[0].toLowerCase()}`}>
+                                        {row.rank}
+                                    </p>
+                                </td>
+                                <td>{row.joiningPort}</td>
+                                <td>{row.joiningDate}</td>
+                                <td>{row.leavingPort}</td>
+                                <td>{row.leavingDate}</td>
+                            </tr>
+                        ))}
+
+                    </tbody>
 
                 </table>
             </section>
