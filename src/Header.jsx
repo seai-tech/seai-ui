@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -6,6 +7,7 @@ import React, {useState} from 'react';
 function Header(){
 
     const [navOpen, setNavOpen] = useState(false);
+    const navigate = useNavigate();
 
     const openNav = ()=>{
         setNavOpen(true);
@@ -15,21 +17,28 @@ function Header(){
         setNavOpen(false);
     }
 
+    const handleLogout = () => {
+        localStorage.clear();
+        navigate('/');
+        window.location.href = '/';
+      };
+
     return(
         <header>
     <nav>
        <div className="side-nav" style={{width:navOpen?'250px':'0'}}>
             <a href="javascript:void(0)" className="closebtn" onClick={() => closeNav()}>&times;</a>
-            <a href="#">Smart scanner</a>
-            <a href="#">Profile</a>
+            <Link to='/login'>Login</Link>
+            <a href="">Smart scanner</a>            
+            <Link to='/profile'>Profile</Link>
             <a href="#">Documents</a>
-            <a href="#">Voyages</a>
+            <Link to='/'>Voyages</Link>
             <a href="#">Booking</a>
             <a href="#">Chat</a>
             <a href="#">Events</a>
             <a href="#">Maritime Administration</a>
             <a href="#">Information</a>
-            <a href="#">Logout</a>
+            <a href="/" onClick={handleLogout}>Logout</a>
             
        
        </div>
@@ -46,7 +55,6 @@ function Header(){
         <div className="wave wave3"></div>
         <div className="wave wave4"></div>
     </div>
-       
 
        </header>
     );
