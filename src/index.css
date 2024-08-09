@@ -319,3 +319,115 @@ tbody tr:hover {
   background-color: rgb(16, 28, 144);
   color: #b7ddf1;
 }
+
+
+/*footer*/
+footer{
+  font-size: 16px;
+  padding-top: 50px;
+  color: #fff;
+  background: #003366;
+}
+
+.footer-container{
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  
+}
+
+.footer-content{
+  width: 33.3%;
+}
+footer h3{
+  font-size: 28px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.footer-content p{
+  width: 190px;
+  margin: auto;
+  padding: 7px;
+}
+
+.footer-content ul{
+  text-align: center;
+}
+
+.footer-quickLinks{
+  padding: 0;
+}
+
+.footer-quickLinks li{
+  width: auto;
+  text-align: center;
+  list-style-type: none;
+  padding: 7px;
+  position: relative;
+  color: #fff;
+}
+
+.footer-quickLinks li::before{
+  content: '';
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top:100%;
+  width: 0;
+  height: 2px;
+  background: #bedcfe;
+  transition-duration: .5s;
+  
+}
+
+.footer-quickLinks li:hover::before{
+  width: 70px;
+}
+
+.social-icons{
+  text-align: center;
+  padding: 0;
+}
+
+.social-icons li{
+  display: inline-block;
+  text-align: center;
+  padding: 5px;
+
+}
+
+.social-icons i{
+  color:white;
+  font-size: 25px;
+}
+
+a{
+  text-decoration: none;
+  color:#fff
+}
+
+a:hover{
+  color:#b7ddf1
+}
+
+.social-icons i:hover{
+  color:#b7ddf1
+}
+
+.bottom-bar{
+  background: #003366;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 50px;
+}
+
+.bottom-bar p{
+  color: #003366;
+  margin: 0;
+  font-size: 16px;
+  padding: 7px;
+  background: #b7ddf1;
+
+}
