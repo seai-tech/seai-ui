@@ -1,10 +1,14 @@
+/*body*/
 *{
   margin: 0;
   padding: 0;
   font-family: 'Merriweather', serif;
   
 }
-/*header navbar*/
+/*body ends*/
+
+
+/*header navbar starts*/
 .side-nav{
     height: 100%;
     width:0;
@@ -60,8 +64,11 @@
   cursor:pointer;
   color:#fff;
 }
+/*header navbar ends*/
 
-/*header content*/
+
+
+/*header content starts*/
 header {
   position: relative;
   width: 100%;
@@ -185,7 +192,12 @@ header h1{
   color: #003366;
 }
 
-/*searchbar*/
+/*header content ends*/
+
+
+
+
+/*searchbar starts*/
 .box{
   height: 40px;
   display: flex;
@@ -214,8 +226,12 @@ width: 400px;
   color:#2E5EAA;
   font-size: 18px;
 }
+/*searchbar ends*/
 
-/*table*/
+
+
+
+/*voyages table starts*/
 table {
   width: 100%;
   text-align: center;
@@ -258,9 +274,9 @@ main.table {
   justify-content: space-between;   
 }
 
-/*.table-header .h1{
-  text-align: center;
-}*/
+
+
+
 
 
 .table-body {
@@ -309,19 +325,21 @@ tbody tr:hover {
   padding: .4rem .1rem;
   border-radius: 1rem;
 }
-
+/*doesn't work*/
 .rank.cpt {
   background-color: rgb(127, 210, 255);
   color: rgb(0, 37, 105);
 }
-
+/*doesn't work*/
 .rank.co {
   background-color: rgb(16, 28, 144);
   color: #b7ddf1;
 }
+ /*voyages table ends*/
 
 
-/*footer*/
+
+/*footer starts*/
 footer{
   font-size: 16px;
   padding-top: 50px;
@@ -431,8 +449,13 @@ a:hover{
   background: #b7ddf1;
 
 }
+/*footer ends*/
 
-/*profile page*/
+
+
+
+
+/*profile page starts*/
 
 form hr{
   color:#003366;
@@ -521,6 +544,7 @@ button {
 button:hover {
   opacity: 0.9;
 }
+/*profile page ends*/
 
 /*login page - the form styling is above - line 443*/
 .login-button{
