@@ -5,17 +5,19 @@ import Header from './Header.jsx';
 import MainContent from './MainContent.jsx';
 import Login from './Login.jsx';
 import Profile from './Profile.jsx';
+import LandingPage from './LandingPage.jsx';
 
 function App() {
   return (
     <Router>
-      <Header />
+     {/*<Header/>*/}
       <Routes>
         <Route path="/" element={<MainContent />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/landing" element={<LandingPage/>}/>
       </Routes>
-      <Footer />
+      {/*<Footer/>*/}
     </Router>
   );
 }

@@ -551,3 +551,67 @@ button:hover {
 .login-button{
   margin-top: 20px;
 }
+
+
+/*landing page css starts here*/
+/*sticky navbar*/
+#horizontalNav{
+  overflow: hidden;
+  background-color: #bedcfe;
+  padding: 90px 10px; /*setting a large padding which will shrink on scroll*/
+  transition: 0.4s;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 99;
+  
+}
+
+#horizontalNav a{
+  float: left;
+  color: #2E5EAA;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 10px;
+  margin-right: 40px;
+}
+
+#horizontalNav #logo{
+  font-size: 35px;
+  transition: 0.4s;
+}
+
+
+#horizontalNav a:hover{
+  background-color: #bedcfe;
+  color: black;
+}
+
+
+#horizontalNav a.active{
+  background-color: #003366;
+  color: white;
+}
+
+#navbar-right{
+  float: right;
+  
+}
+
+/*responsive design*/
+@media screen and (max-width: 580px) {
+  #horizontalNav {
+    padding: 20px 10px !important; /* Use !important to make sure that JavaScript doesn't override the padding on small screens */
+  }
+  #navbar a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  #navbar-right {
+    float: none;
+  }
+}
