@@ -1,6 +1,7 @@
-// Login.js
-import React, { useState } from 'react';
+
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -8,6 +9,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,6 +37,7 @@ const Login = () => {
           localStorage.setItem('userId', data.userId);
 
 
+          
           navigate('/');
         } else {
           setError(data.message || 'Login failed');

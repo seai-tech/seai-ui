@@ -7,6 +7,87 @@
 }
 /*body ends*/
 
+/*header starts*/
+header{
+  background-color: #4c9cf1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  height: 15vh;
+  
+}
+nav ul.nav-links{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+}
+
+nav ul.nav-links li{
+  display: inline;
+}
+
+.nav-button{
+  text-decoration: none;
+  background-color: white;
+  color: #003366;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+
+}
+.nav-button:hover{
+  background-color:#2E5EAA;
+  color: white;
+}
+
+nav{
+  margin-left: auto;
+}
+
+
+/*header ends*/
+
+/*footer starts*/
+footer{
+  margin-top: 10vh;
+  background-color: #4c9cf1;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  height: auto;
+  color:#fff;
+}
+
+footer .footer-container{
+  flex-grow:1;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+footer .footer-content{
+  text-align: right;
+  margin-right: 5vw;
+ 
+  color: #fff;
+}
+footer .bottom-bar{
+  text-align: center;
+  padding-top: 10px;
+  margin-top: auto; 
+}
+
+footer .bottom-bar p{
+  color: #fff;
+  font-size: 16px;
+}
+
 
 /*header navbar starts*/
 .side-nav{
@@ -68,7 +149,7 @@
 
 
 
-/*header content starts*/
+/*voyages header content starts
 header {
   position: relative;
   width: 100%;
@@ -76,7 +157,7 @@ header {
   background-image: url(./assets/ship_background.jpg);
   background-size: cover;
   background-position: center;
-  background-color: #003366; /* Navy blue background */
+  background-color: #003366; /* Navy blue background 
   overflow: hidden;
 }
 
@@ -158,18 +239,18 @@ header h1{
   color: #fff;
 }
 
-/*header buttons*/
+
 .button-container {
   margin-top: 7vh;
   text-align: center;
   display: flex;
   justify-content: center;
-  gap: 20vw; /* Adjust the gap between buttons as needed */
+  gap: 20vw; 
 }
 
 .button {
   width: 150px;
-  background-color: #003366; /* Navy blue background for buttons */
+  background-color: #003366; 
   color: #ffffff;
   padding: 15px 32px;
   text-align: center;
@@ -192,7 +273,7 @@ header h1{
   color: #003366;
 }
 
-/*header content ends*/
+voyages header content ends*/
 
 
 
@@ -339,7 +420,7 @@ tbody tr:hover {
 
 
 
-/*footer starts*/
+/*footer starts
 footer{
   font-size: 16px;
   padding-top: 50px;
@@ -449,7 +530,7 @@ a:hover{
   background: #b7ddf1;
 
 }
-/*footer ends*/
+footer ends*/
 
 
 
