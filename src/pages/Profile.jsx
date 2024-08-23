@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import styles from '../style/Form.module.css';
+import classnames from 'classnames';
+
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -50,12 +53,12 @@ const Profile = () => {
 
   return (
     <form>
-      <div className='personal-information'>
+      <div className={styles.personalInformation}>
         <h2>Personal Information    <i class="fa-solid fa-user"></i></h2>
         
         <hr />
 
-       <div className='form-group-inline'>
+       <div className={styles.formGroupInline}>
         <div>
           <label htmlFor="first-name">First name:</label>
           <input type="text" name="first-name" id="first-name" value={userData.firstName} readOnly/>
@@ -67,12 +70,12 @@ const Profile = () => {
         </div>       
        </div>
 
-       <div className="form-group">
+       <div className={styles.formGroup}>
           <label htmlFor="dob">Date of Birth:</label>
           <input type="date" id="dob" name="dob" value={new Date(userData.dateOfBirth).toISOString().split('T')[0]} readOnly />
         </div>
 
-        <div className="form-group-inline">
+        <div className={styles.formGroupInline}>
           <div>
             <label htmlFor="email">Email:</label>
             <input type="email" id="email" name="email" value={userData.email} readOnly />
@@ -83,18 +86,18 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="home-airport">Home airport:</label>
           <input type="text" id="home-airport" name="home-airport" value={userData.homeAirport} readOnly />
         </div>
       </div>
 
-      <div className="additional-information">
+      <div className={styles.additionalInformation}>
         <h2>Additional Information   <i class="fa-solid fa-circle-info"></i></h2>
         
         <hr />
 
-        <div className="form-group-inline">
+        <div className={styles.formGroupInline}>
           <div>
             <label htmlFor="readiness-date">Readiness date:</label>
             <input type="date" id="readiness-date" name="readiness-date" value={new Date(userData.readinessDate).toISOString().split('T')[0]} readOnly />
@@ -105,7 +108,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="form-group-inline">
+        <div className={styles.formGroupInline}>
           <div>
             <label htmlFor="rank">Rank:</label>
             <select id="rank" name="rank" value={userData.rank} disabled>
@@ -129,21 +132,22 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="employer">Present employer:</label>
           <input type="text" id="employer" name="employer" value={userData.presentEmployer} readOnly />
         </div>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="manning-agents">Manning agents:</label>
           <input type="text" id="manning-agents" name="manning-agents" value={userData.manningAgents} readOnly />
         </div>
       </div>
 
-      <div className="buttons">
-        <button type="submit" className="btn btn-update">Update</button>
-        <button type="button" className="btn btn-delete">Delete</button>
-        <button type="button" className="btn btn-download">Download</button>
+      <div className={styles.buttons}>
+        <button type="submit" ><i class="fa-solid fa-file-pen"></i>   Update</button>
+        <button type="button" className={classnames(styles.btn, styles.btnDownload)}><i class="fa-solid fa-download"></i>   Download</button>
+        <button type="button" className={classnames(styles.btn, styles.btnDelete)}><i class="fa-solid fa-trash-can"></i>   Delete</button>
+        
       </div>
     </form>
 

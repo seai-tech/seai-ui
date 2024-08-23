@@ -1,6 +1,6 @@
-
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from '../style/Login.module.css'
 
 
 const Login = () => {
@@ -74,7 +74,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button className="login-button" type="submit" disabled={loading}>Login</button>
+        <button className={styles.loginButton} type="submit" disabled={loading}>Login</button>
       </form>
     </div>
   );

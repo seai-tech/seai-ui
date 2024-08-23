@@ -1,0 +1,95 @@
+
+header{
+    background-color: #4c9cf1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    height: 15vh;
+    
+  }
+  
+  header .logo{
+    height: 10vh;
+  }
+  nav ul.navLinks{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+  }
+  
+  nav ul.navLinks li{
+    display: inline;
+  }
+  
+  .navButton{
+    text-decoration: none;
+    background-color: white;
+    color: #003366;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    cursor: pointer;
+  
+  }
+  .navButton:hover{
+    background-color:#2E5EAA;
+    color: white;
+  }
+  
+  nav{
+    margin-left: auto;
+  }
+  
+  /*side menu*/
+  .sideNav{
+    height: 100%;
+    width:0;
+    position: fixed;
+    z-index: 1001;
+    background-color: #fff;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    top:0;
+    right: 0;
+
+  }
+.sideNav a{
+    padding: 10px;
+    margin: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    color:#fff;
+    background-color: #003366;
+    border-radius: 20px;
+    display: block;
+    transition: 0.3s;
+}
+
+.sideNav a:hover{
+    background-color: #bedcfe;
+    color: #003366;
+}
+
+.sideNav .closebtn{
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  background-color: #fff;
+  color: #003366;
+  padding: 0;
+}
+
+.sideNav .closebtn:hover{
+  background-color: #fff;
+  color: #003366;
+
+}

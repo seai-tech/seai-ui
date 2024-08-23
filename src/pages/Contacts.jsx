@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const LandingPage=()=>{
+const Contacts=()=>{
     return(
         <>
-       <p>landing</p>
+       <p>contacts</p>
         </>
 
     );
 
 };
 
-export default LandingPage;
+export default Contacts;

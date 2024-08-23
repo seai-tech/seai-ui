@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import logo from '../assets/seai_grey.png';
+import styles from '../style/Header.module.css';
 
 const Header = () => {
   const [navOpen, setNavOpen] = useState(false);
@@ -35,31 +37,31 @@ const Header = () => {
 
   return (
     <header>
-      <img src="test-seai/src/assets/seai_logo.PNG" alt="logo" /> 
+      <img src={logo} alt="logo" className={styles.logo} /> 
       <nav>
-        <ul className="nav-links">
+        <ul className={styles.navLinks}>
           {userId ? (
             <>
-              <li><Link to="/profile" className="nav-button">Profile</Link></li>
-              <li className="nav-button" onClick={openNav}>Menu</li>
-              <li><a href="/" onClick={handleLogout} className="nav-button">Logout</a></li>
+              <li><Link to="/profile" className={styles.navButton}>Profile</Link></li>
+              <li className={styles.navButton} onClick={openNav}>Menu</li>
+              <li><a href="/" onClick={handleLogout} className={styles.navButton}>Logout</a></li>
             </>
           ) : (
             <>
-              <li><Link to="#" className="nav-button">Book Demo</Link></li>
-              <li><Link to="/login" className="nav-button">Log In</Link></li>
+              <li><Link to="#" className={styles.navButton}>Book Demo</Link></li>
+              <li><Link to="/login" className={styles.navButton}>Log In</Link></li>
             </>
           )}
         </ul>
       </nav>
 
       {/*side navigation*/}
-      <div className="side-nav" style={{width:navOpen?'250px':'0'}}>
-      <a href="javascript:void(0)" className="closebtn" onClick={closeNav}>&times;</a>
+      <div className={styles.sideNav} style={{width:navOpen?'250px':'0'}}>
+      <a href="javascript:void(0)" className={styles.closebtn} onClick={closeNav}>&times;</a>
       <Link to='/login'>Login</Link>
       <a href="#">Smart scanner</a>
       <Link to='/profile'>Profile</Link>
-      <a href="#">Documents</a>
+      <a href="/documents">Documents</a>
       <Link to='/voyages'>Voyages</Link>
       <a href="#">Booking</a>
       <a href="#">Chat</a>
