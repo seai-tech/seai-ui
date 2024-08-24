@@ -1,0 +1,158 @@
+.container{
+  display: flex;
+}
+
+#firstContainer{
+  margin-top: 30vh;
+}
+
+#textDiv{
+  width: 40%;
+  padding-left: 10vw;
+}
+
+#imgDiv{
+  padding-left: 10vw;
+}
+
+.heading { 
+  font-size: 60px;
+  font-weight: bold;
+  color: transparent;
+  background: linear-gradient(to top left, #cc99ff 0%, #000099 100%);
+  -webkit-background-clip: text;
+  background-clip: text; 
+}
+
+.text{
+  font-size: 20px;
+  color: #000099;
+  margin-top: 10vh;
+  
+}
+
+/*our advantages*/
+
+#ourAdvantages{
+    margin-top: 20vh;
+    text-align: center;
+}
+#secondContainer{
+  margin-top: 10vh;
+  justify-content: space-between;
+  padding: 5vw;
+}
+.card{
+  overflow: hidden;
+  position: relative;
+  width: 200px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  background: rgb(210, 226, 255);
+  height: 50vh;
+}
+
+.card img {
+  width: 20%;
+  height: auto;
+  margin: 5%;
+  transition: transform 0.3s ease-in-out;
+  
+}
+
+.card:hover img {
+  transform: scale(1.1);
+}
+
+.cardContent {
+  padding: 15px; 
+  text-align: center;
+  
+}
+
+/*why us*/
+#whyUs{
+  margin-top: 20vh;
+  text-align: center;
+}
+
+
+/*accordion*/
+
+.accordionContent{
+  padding-left: 10vw;
+  margin-top: 10vh;
+  width: 70%;
+}
+
+.accordionContent i{
+  float: right;
+}
+.accordion {
+  background-color:  rgb(210, 226, 255);
+  color: #444;
+  cursor: pointer;
+  padding: 15px;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.4s ease;
+  font-size: 16px;
+}
+
+.accordion:hover {
+  background-color: #5096f3 ;
+  color: white;
+  
+}
+
+.panel {
+  padding: 0 15px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  
+}
+
+.panel.active {
+  max-height: 100px; /* Adjust as needed */
+  opacity: 1;
+}
+
+
+#fourthContainer{
+  
+  justify-content: space-between;
+  text-align: center;
+  padding: 10vw;
+}
+
+#fourthContainer p{
+  color: #000099;
+  text-align: center;
+  margin-top: 10vh;
+  font-size: 20px;
+}
+
+#seaiEnableYou{
+  margin-top: 20vh;
+  text-align: center;
+}
+
+.bookDemo{
+  background-color: #000099;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  width: 200px;
+}
+
+.bookDemo:hover{
+  background-color: #5096f3;
+  transition: 0.3s;
+}
+
+.buttonContainer{
+  text-align: center;
+}
