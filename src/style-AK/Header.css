@@ -1,0 +1,155 @@
+/* Header navigation bar */
+.header {
+    background-color: #4774e6;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    height: 9vh;
+}
+
+/* Navigation links container */
+.nav-links {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Individual button styling */
+.nav-button {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: font-size 0.3s ease;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+/* Hover effect for buttons */
+.nav-button:hover {
+    font-size: 27px; 
+}
+
+/* Logo container */
+.logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Logo image styling */
+.logo {
+    height: 10vh;
+    transition: height 0.2s ease;
+}
+
+.logo:hover {
+    height: 10.5vh;
+}
+
+.side-nav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1001;
+    background-color: #fff;
+    overflow-x: hidden;
+    transition: 0.1s;
+    padding-top: 60px;
+    top: 0;
+    left: 0;
+}
+
+/* Sidebar link styling */
+.side-nav-link,
+.side-nav-link button {
+    padding: 10px;
+    margin: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    color: #4774e6;
+    background-color: white;
+    border: 1px solid #4774e6;
+    border-radius: 5px;
+    display: block;
+    width: calc(100% - 40px);
+    box-sizing: border-box;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+/* Hover effect for sidebar links/buttons */
+.side-nav-link:hover,
+.side-nav-link button:hover {
+    box-shadow: 0px 0px 5px 2px #003366;
+    transform: scale(1.02);
+}
+
+/* Close button in the sidebar */
+.side-nav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 7px;
+    font-size: 25px;
+    margin-left: 50px;
+    background-color: #fff;
+    border-color: white;
+    color: #4774e6;
+    padding: 20px;
+    transition: text-shadow 0.3s ease;
+}
+
+/* Hover effect for close button */
+.side-nav .closebtn:hover {
+    text-shadow: 0px 0px 5px 2px #003366;
+}
+
+/* Class to open the sidebar */
+.side-nav.open {
+    width: 300px;
+}
+
+/* Logo at the bottom of the sidebar */
+.side-nav .logo-link {
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Sidebar logo styling */
+.side-nav-logo {
+    height: 9vh;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    /* Adjust logo positioning on smaller screens */
+    .logo-container {
+        left: auto;
+        right: 20px;           
+        transform: none;       
+    }
+    .nav-button {
+        order: 1;
+    }
+    .side-nav.open {
+        width: 100%;
+    }
+    .side-nav .closebtn {
+        right: 20px;
+        top: 0;
+    }
+
+    .side-nav .logo-link {
+        bottom: 100px;
+    }
+}

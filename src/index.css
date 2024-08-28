@@ -1,6 +1,11 @@
-*{
-  margin: 0;
-  padding: 0;
-  font-family: 'Merriweather', serif;
-  
+/* Correct @import statements */
+@import url('./style-AK/Header.css');
+@import url('./style-AK/Footer.css');
+
+/* Other CSS rules go below the @import statements */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
 }
+

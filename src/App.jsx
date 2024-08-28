@@ -1,54 +1,50 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header.jsx';
-import Footer from './components/Footer.jsx';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Header from './components-redo/Header-redo';
+import Footer from './components-redo/Footer-redo';
+import Home from './pages-apis/base/Home';
+import About from './pages-apis/base/About';
+import Contact from './pages-apis/base/Contact';
+import Login from './pages-apis/login-register/Login';
+import Register from './pages-apis/login-register/Register';
+import Profile from './pages-apis/profile/Profile';
+import ProfileUpdate from './pages-apis/profile/ProfileUpdate';
+import Voyages from './pages-apis/voyages/Voyages';
+import VoyageCreate from './pages-apis/voyages/VoyageCreate';
+import VoyageUpdate from './pages-apis/voyages/VoyageUpdate';
+import Documents from './pages-apis/documents/Documents';
+import DocumentDetails from './pages-apis/documents/DocumentDetails';
+import DocumentUpdate from './pages-apis/documents/DocumentUpdate';
+import DocumentCreate from './pages-apis/documents/DocumentCreate';
+import PrivateRoute from './private-route/PrivateRoute';
 
-import Home from './pages/Home.jsx';
-/*import About from './pages/About.jsx';*/
-import Contacts  from './pages/Contacts.jsx';
-
-
-import Login from './pages/Login.jsx';
-import Profile from './pages/Profile.jsx';
-
-import Voyages from './pages/Voyages.jsx';
-import VoyageCreate from './pages/VoyageCreate.jsx';
-import VoyageUpdate from './pages/VoyageUpdate.jsx';
-
-import Documents from './pages/Documents.jsx';
-import DocumentCreate from './pages/DocumentCreate.jsx';
-import DocumentDetails from './pages/DocumentDetails.jsx';
-import DocumentUpdate from './pages/DocumentUpdate.jsx';
-
-
-
-
-function App()
- {
- 
+function App() {
   return (
-   
-    <Router>
-     <Header/>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        
-        <Route path="/contacts" element={<Contacts />} />
+    <div>
+      <Header />
+        <Routes>
 
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-        <Route path="/voyages" element={<Voyages />} />
-        <Route path="/voyages/create" element={<VoyageCreate />} />
-        <Route path="/voyages/update" element={<VoyageUpdate />} />
+          <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <Route path="/profile/:userId/edit" element={<PrivateRoute><ProfileUpdate /></PrivateRoute>} />
 
-        <Route path="/documents" element={<Documents />} />
-        <Route path="/documents/create" element={<DocumentCreate />} />
-        <Route path="/documents/details" element={<DocumentDetails />} />
-        <Route path="/documents/update" element={<DocumentUpdate />} />
-      </Routes>
-      <Footer/>
-    </Router>   
+          <Route path="/voyages" element={<PrivateRoute><Voyages /></PrivateRoute>} />
+          <Route path="/voyages/create" element={<PrivateRoute><VoyageCreate /></PrivateRoute>} />
+          <Route path="/voyages/:voyageId/edit" element={<PrivateRoute><VoyageUpdate /></PrivateRoute>} />
+
+          <Route path="/documents" element={<PrivateRoute><Documents /></PrivateRoute>} />
+          <Route path="/documents/:documentId" element={<PrivateRoute><DocumentDetails /></PrivateRoute>} />
+          <Route path="/documents/:documentId/edit" element={<PrivateRoute><DocumentUpdate /></PrivateRoute>} />
+          <Route path="/documents/create" element={<PrivateRoute><DocumentCreate /></PrivateRoute>} />
+        </Routes>
+      <Footer />
+    </div>
   );
 }
 
