@@ -60,6 +60,14 @@ const Register = () => {
           <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
         </div>
         <div>
+          <label>First Name:</label>
+          <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} required />
+        </div>
+        <div>
+          <label>Last Name:</label>
+          <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} required />
+        </div>
+        <div>
           <label>Password:</label>
           <input type="password" name="password" value={formData.password} onChange={handleInputChange} required />
         </div>
@@ -67,13 +75,15 @@ const Register = () => {
           <label>Confirm Password:</label>
           <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleInputChange} required />
         </div>
+
         <div>
-          <label>First Name:</label>
-          <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} required />
-        </div>
-        <div>
-          <label>Last Name:</label>
-          <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} required />
+          <input
+            type="checkbox"
+            name="gdprAccepted"
+            checked={formData.gdprAccepted}
+            onChange={handleInputChange}
+          />
+          <label>I have read and accept the <a href="https://app.seai.co/assets/assets/gdpr.bc1effe864ae8eaf453c51a451fb1aee.pdf?platform=web&hash=bc1effe864ae8eaf453c51a451fb1aee" target="_blank" rel="noopener noreferrer">GDPR policy</a></label>
         </div>
         <button type="submit" disabled={loading}>Register</button>
       </form>

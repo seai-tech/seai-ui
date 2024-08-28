@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { vesselTypeOptions, rankOptions } from '../../constants';
+import jsPDF from 'jspdf';
 
 const Profile = () => {
   const { userId, accessToken, email } = useContext(AuthContext);
@@ -86,10 +87,52 @@ const Profile = () => {
         throw new Error('Failed to update user data');
       }
 
-      navigate('/profile'); // Navigate back to the profile page after updating
+      navigate('/'); // Navigate back to the profile page after updating
     } catch (err) {
       setError(err.message);
     }
+  };
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`https://api.seai.co/api/v1/users/${userId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete user data');
+      }
+
+      // Assuming that after deletion, you would redirect to the homepage or login page
+      navigate('/');
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleDownloadPDF = () => {
+    const doc = new jsPDF();
+
+    doc.text('User Profile', 10, 10);
+    doc.text(`First Name: ${userData.firstName}`, 10, 20);
+    doc.text(`Last Name: ${userData.lastName}`, 10, 30);
+    doc.text(`Date of Birth: ${new Date(userData.dateOfBirth).toLocaleDateString()}`, 10, 40);
+    doc.text(`Phone: ${userData.phone}`, 10, 50);
+    doc.text(`Email: ${userData.email}`, 10, 60);
+    doc.text(`Home Airport: ${userData.homeAirport}`, 10, 70);
+    doc.text(`Readiness Date: ${new Date(userData.readinessDate).toLocaleDateString()}`, 10, 80);
+    doc.text(`Contract Duration: ${userData.contractDuration} months`, 10, 90);
+    doc.text(`Rank: ${userData.rank}`, 10, 100);
+    doc.text(`Vessel Type: ${userData.vesselType}`, 10, 110);
+    doc.text(`Status: ${userData.status}`, 10, 120);
+    doc.text(`Present Employer: ${userData.presentEmployer}`, 10, 130);
+    doc.text(`Manning Agents: ${userData.manningAgents}`, 10, 140);
+
+    doc.save(`Profile - ${userData.firstName} ${userData.lastName}`);
   };
 
   if (loading) {
@@ -198,7 +241,8 @@ const Profile = () => {
 
       <div>
         <button type="submit">Save Changes</button>
-        <button type="button" onClick={() => navigate('/profile')}>Cancel</button>
+        <button type="button" onClick={handleDelete}>Delete Profile</button>
+        <button type="button" onClick={handleDownloadPDF}>Download PDF</button>
       </div>
     </form>
   );
