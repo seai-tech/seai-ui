@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { saveAs } from 'file-saver';
+import Loading from '../../components-redo/Loading';
 
 const Documents = () => {
   const [documents, setDocuments] = useState([]);
@@ -157,11 +158,11 @@ const Documents = () => {
   };
 
   const handleRowClick = (documentId) => {
-    navigate(`/documents/${documentId}`);
+    navigate(`/documents/${documentId}/update`);
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (error) {
@@ -278,7 +279,7 @@ const Documents = () => {
             </div>
             <div className="document-card-item">
               <button
-                onClick={() => navigate(`/documents/${document.id}`)}
+                onClick={() => navigate(`/documents/${document.id}/update`)}
                 className="document-card-edit-btn"
               >
                 Update

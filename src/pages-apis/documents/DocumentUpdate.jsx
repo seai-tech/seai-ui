@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import { saveAs } from 'file-saver';
 
 const DocumentUpdate = () => {
   const { documentId } = useParams();
@@ -14,8 +15,8 @@ const DocumentUpdate = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
   const fileInputRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDocumentDetails = async () => {
@@ -102,7 +103,7 @@ const DocumentUpdate = () => {
           'Authorization': `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...document, verified }),  // Pass the verified status to the API
+        body: JSON.stringify({ ...document, verified }),
       });
 
       if (response.ok) {
@@ -130,14 +131,55 @@ const DocumentUpdate = () => {
       });
 
       if (response.ok) {
-        const imageBlob = await response.blob();
-        const imageUrl = URL.createObjectURL(imageBlob);
-        setImageUrl(imageUrl); // Update the state to reflect the new image URL
+        const imageUrl = URL.createObjectURL(file);
+        setImageUrl(imageUrl);
       } else {
         console.error('Failed to upload image');
       }
     } catch (err) {
       console.error('Error uploading image:', err);
+    }
+  };
+
+  const downloadImage = async () => {
+    try {
+      const response = await fetch(`https://api.seai.co/api/v1/users/${userId}/documents/${documentId}/files`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const imageBlob = await response.blob();
+        saveAs(imageBlob, `${document.name}.jpg`);
+      } else {
+        console.error('Failed to download document image');
+      }
+    } catch (err) {
+      console.error('Error downloading document image:', err);
+    }
+  };
+
+  const handleDeleteDocument = async () => {
+    try {
+      const response = await fetch(`https://api.seai.co/api/v1/users/${userId}/documents/${documentId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        navigate('/documents');
+      } else {
+        setError('Failed to delete document');
+      }
+    } catch (err) {
+      setError('An error occurred. Please try again.');
+      console.error('Error deleting document:', err);
     }
   };
 
@@ -156,75 +198,77 @@ const DocumentUpdate = () => {
   }
 
   return (
-    <div>
-      <h2>Edit Document</h2>
-      <div>
-        <label>
-          Name:
+    <div className='single-document'>
+      
+      <div className="document-update-container">
+      <h1>Document №{document.number}</h1>
+        <div className="image-container">
+          {imageUrl && (
+            <div>
+              <img
+                src={imageUrl}
+                alt="Document"
+              />
+            </div>
+          )}
+          <button onClick={() => fileInputRef.current.click()}>
+            <i className="fas fa-camera"></i> Change Photo
+          </button>
           <input
-            type="text"
-            name="name"
-            value={document.name}
-            onChange={handleInputChange}
+            type="file"
+            ref={fileInputRef}
+            accept="image/*"
+            style={{ display: 'none' }}
+            onChange={(e) => {
+              if (e.target.files && e.target.files[0]) {
+                uploadImage(e.target.files[0]);
+              }
+            }}
           />
-        </label>
-      </div>
-      <div>
-        <label>
-          Number:
-          <input
-            type="text"
-            name="number"
-            value={document.number}
-            onChange={handleInputChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Issue Date:
-          <input
-            type="date"
-            name="issueDate"
-            value={document.issueDate.split('T')[0]}
-            onChange={handleInputChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Expiry Date:
-          <input
-            type="date"
-            name="expiryDate"
-            value={document.expiryDate?.split('T')[0] || ''}
-            onChange={handleInputChange}
-          />
-        </label>
-      </div>
-      <div>
-        {imageUrl && (
-          <img
-            src={imageUrl}
-            alt="Document"
-            style={{ maxWidth: '100%', height: 'auto', marginBottom: '10px' }}
-          />
-        )}
-        <button onClick={() => fileInputRef.current.click()}>Change Photo</button>
-        <input
-          type="file"
-          ref={fileInputRef} // Attach ref to file input
-          accept="image/*"
-          style={{ display: 'none' }} // Hide the file input
-          onChange={(e) => {
-            if (e.target.files && e.target.files[0]) {
-              uploadImage(e.target.files[0]); // Upload image
-            }
-          }}
-        />
-      </div>
-      <div>
-        <button onClick={handleUpdate}>Update</button>
+        </div>
+        <div className="form-container">
+          <label>
+            Name:
+            <input
+              type="text"
+              name="name"
+              value={document.name}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Number:
+            <input
+              type="text"
+              name="number"
+              value={document.number}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Issue Date:
+            <input
+              type="date"
+              name="issueDate"
+              value={document.issueDate.split('T')[0]}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Expiry Date:
+            <input
+              type="date"
+              name="expiryDate"
+              value={document.expiryDate?.split('T')[0] || ''}
+              onChange={handleInputChange}
+            />
+          </label>
+          <div className="buttons-container">
+            <button className="button-update" onClick={handleUpdate}>Update</button>
+            <button className="button-download" onClick={downloadImage}>Download</button>
+            <button className="button-delete" onClick={handleDeleteDocument}>Delete</button>
+          </div>
+        </div>
       </div>
     </div>
   );

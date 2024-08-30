@@ -37,7 +37,7 @@ const Voyages = () => {
   }, [userId, accessToken]);
 
   const handleEdit = (voyage) => {
-    navigate(`/voyages/${voyage.id}/edit`, { state: { voyage } });
+    navigate(`/voyages/${voyage.id}/update`, { state: { voyage } });
   };
 
   const handleAddNewVoyage = () => {

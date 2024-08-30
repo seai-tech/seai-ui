@@ -8,15 +8,16 @@ import Contact from './pages-apis/base/Contact';
 import Login from './pages-apis/login-register/Login';
 import Register from './pages-apis/login-register/Register';
 import Profile from './pages-apis/profile/Profile';
-// import ProfileUpdate from './pages-apis/profile/ProfileUpdate';
 import Voyages from './pages-apis/voyages/Voyages';
 import VoyageCreate from './pages-apis/voyages/VoyageCreate';
 import VoyageUpdate from './pages-apis/voyages/VoyageUpdate';
 import Documents from './pages-apis/documents/Documents';
-import DocumentDetails from './pages-apis/documents/DocumentDetails';
 import DocumentUpdate from './pages-apis/documents/DocumentUpdate';
 import DocumentCreate from './pages-apis/documents/DocumentCreate';
 import PrivateRoute from './private-route/PrivateRoute';
+
+import Loading from './components-redo/Loading';
+import Error from './components-redo/Error';
 
 function App() {
   return (
@@ -28,20 +29,23 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
 
+          <Route path="/loading" element={<Loading />} />
+
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
-          {/* <Route path="/profile/:userId/edit" element={<PrivateRoute><ProfileUpdate /></PrivateRoute>} /> */}
 
           <Route path="/voyages" element={<PrivateRoute><Voyages /></PrivateRoute>} />
           <Route path="/voyages/create" element={<PrivateRoute><VoyageCreate /></PrivateRoute>} />
-          <Route path="/voyages/:voyageId/edit" element={<PrivateRoute><VoyageUpdate /></PrivateRoute>} />
+          <Route path="/voyages/:voyageId/update" element={<PrivateRoute><VoyageUpdate /></PrivateRoute>} />
 
           <Route path="/documents" element={<PrivateRoute><Documents /></PrivateRoute>} />
-          <Route path="/documents/:documentId" element={<PrivateRoute><DocumentDetails /></PrivateRoute>} />
-          <Route path="/documents/:documentId/edit" element={<PrivateRoute><DocumentUpdate /></PrivateRoute>} />
           <Route path="/documents/create" element={<PrivateRoute><DocumentCreate /></PrivateRoute>} />
+          <Route path="/documents/:documentId/update" element={<PrivateRoute><DocumentUpdate /></PrivateRoute>} />
+
+          <Route path="/*" element={<Error />} />
         </Routes>
       <Footer />
     </div>

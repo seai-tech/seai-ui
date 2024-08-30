@@ -38,6 +38,7 @@
     overflow-x: auto;
     background-color: #fff;
     display: block; /* Ensure the table is shown by default */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .voyages-table {
@@ -132,6 +133,7 @@
         border-radius: 5px;
         padding: 15px;
         background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     .voyage-card-item {

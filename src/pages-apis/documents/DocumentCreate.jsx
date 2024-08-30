@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
@@ -9,13 +9,16 @@ const CreateDocument = () => {
   const [issueDate, setIssueDate] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setImage(e.target.files[0]);
+      setImagePreview(URL.createObjectURL(e.target.files[0]));
     }
   };
 
@@ -34,11 +37,10 @@ const CreateDocument = () => {
       number,
       issueDate,
       expiryDate,
-      verified: true, // Assuming verified is always true upon creation
+      verified: true,
     };
 
     try {
-      // First, create the document without the image
       const documentResponse = await fetch(`https://api.seai.co/api/v1/users/${userId}/documents`, {
         method: 'POST',
         headers: {
@@ -50,9 +52,8 @@ const CreateDocument = () => {
 
       if (documentResponse.ok) {
         const document = await documentResponse.json();
-        const documentId = document.id; // Assuming the response includes the new document's ID
+        const documentId = document.id;
 
-        // Now, upload the image
         const formData = new FormData();
         formData.append('file', image);
 
@@ -65,7 +66,6 @@ const CreateDocument = () => {
         });
 
         if (imageResponse.ok) {
-          // After successful creation and image upload, navigate to the documents page
           navigate('/documents');
         } else {
           setError('Failed to upload image');
@@ -82,11 +82,11 @@ const CreateDocument = () => {
   };
 
   return (
-    <div>
-      <h2>Create New Document</h2>
+    <div className="create-document-container">
+      <h1>Create New Document</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} className="create-document-form">
+        <div className="form-group">
           <label>
             Name:
             <input
@@ -97,7 +97,7 @@ const CreateDocument = () => {
             />
           </label>
         </div>
-        <div>
+        <div className="form-group">
           <label>
             Number:
             <input
@@ -108,7 +108,7 @@ const CreateDocument = () => {
             />
           </label>
         </div>
-        <div>
+        <div className="form-group">
           <label>
             Issue Date:
             <input
@@ -119,7 +119,7 @@ const CreateDocument = () => {
             />
           </label>
         </div>
-        <div>
+        <div className="form-group">
           <label>
             Expiry Date:
             <input
@@ -129,18 +129,42 @@ const CreateDocument = () => {
             />
           </label>
         </div>
-        <div>
-          <label>
-            Image:
+
+        {!imagePreview && (
+          <div className="form-group">
+            <label>
+              Image:
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                required
+              />
+            </label>
+          </div>
+        )}
+
+        {imagePreview && (
+          <div className="image-preview-container">
+            <img src={imagePreview} alt="Preview" className="image-preview" />
+            <button
+              type="button"
+              onClick={() => fileInputRef.current.click()}
+              className="change-image-button"
+            >
+              <i className="fas fa-camera"></i> Change Photo
+            </button>
             <input
               type="file"
+              ref={fileInputRef}
               accept="image/*"
               onChange={handleImageChange}
-              required
+              style={{ display: 'none' }}
             />
-          </label>
-        </div>
-        <button type="submit" disabled={loading}>
+          </div>
+        )}
+
+        <button type="submit" disabled={loading} className="btn-create-one-document">
           {loading ? 'Creating...' : 'Create Document'}
         </button>
       </form>

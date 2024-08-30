@@ -16,6 +16,7 @@
 
 .document-buttons {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     margin-bottom: 20px;
     gap: 20px;
@@ -59,6 +60,7 @@
     overflow-x: auto;
     background-color: #fff;
     display: block;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .documents-table {
@@ -163,6 +165,7 @@
         border-radius: 5px;
         padding: 15px;
         background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     .document-card-item {
@@ -223,5 +226,11 @@
     .document-card-edit-btn:hover {
         background-color: #4CAF50;
         color: #fff;
+    }
+
+    .document-buttons {
+        flex-direction: column;
+        gap: 0;
+        margin: 0;
     }
 }
