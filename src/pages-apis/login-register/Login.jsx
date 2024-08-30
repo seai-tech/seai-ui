@@ -48,9 +48,9 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
+    <div className="login-body">
+      <form onSubmit={handleSubmit} className="login-form">
+        <h1>Login</h1>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {loading && <p>Loading...</p>}
         <div>
@@ -72,14 +72,15 @@ const Login = () => {
           />
         </div>
         <button type="submit" disabled={loading}>Login</button>
-      </form>
-      {error === 'Please verify your email before logging in.' && (
+        {error === 'Please verify your email before logging in.' && (
         <p>
           Didn't receive a verification email? <a href={`/resend-verification?email=${encodeURIComponent(email)}`}>Resend Verification Email</a>
         </p>
       )}
       <p>Don't have an account? <a href="/register">Register</a></p>
+      </form>
     </div>
+
   );
 };
 

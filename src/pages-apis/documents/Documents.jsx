@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { saveAs } from 'file-saver';
 
@@ -9,6 +9,8 @@ const Documents = () => {
   const [selectedDocuments, setSelectedDocuments] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [documentsPerPage, setDocumentsPerPage] = useState(10);
   const { userId, accessToken } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -120,6 +122,21 @@ const Documents = () => {
     navigate('/documents/create');
   };
 
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleDocumentsPerPageChange = (event) => {
+    setDocumentsPerPage(Number(event.target.value));
+    setCurrentPage(1);
+  };
+
+  const indexOfLastDocument = currentPage * documentsPerPage;
+  const indexOfFirstDocument = indexOfLastDocument - documentsPerPage;
+  const currentDocuments = documents.slice(indexOfFirstDocument, indexOfLastDocument);
+
+  const totalPages = Math.ceil(documents.length / documentsPerPage);
+
   const getVerificationStatus = (expiryDate) => {
     if (!expiryDate) return 'N/A';
 
@@ -139,6 +156,10 @@ const Documents = () => {
     }
   };
 
+  const handleRowClick = (documentId) => {
+    navigate(`/documents/${documentId}`);
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -148,66 +169,143 @@ const Documents = () => {
   }
 
   return (
-    <div>
-      <h2>Documents</h2>
-      <button onClick={downloadSelectedImages} disabled={!selectedDocuments.length}>
-        Download Selected
-      </button>
-      <button onClick={navigateToCreateDocument}>
-        Create Document
-      </button>
-      <table>
-        <thead>
-          <tr>
-            <th>
-              <input
-                type="checkbox"
-                checked={selectedDocuments.length === documents.length}
-                onChange={handleSelectAll}
-              />
-            </th>
-            <th>Preview</th>
-            <th>Name</th>
-            <th>Number</th>
-            <th>Issue Date</th>
-            <th>Expiry Date</th>
-            <th>Verification Status</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          {documents.map((document) => (
-            <tr key={document.id}>
-              <td>
+    <div className="documents-container">
+      <h1>Documents</h1>
+      <div className="document-buttons">
+        <button onClick={downloadSelectedImages} className="btn-download-selected" disabled={!selectedDocuments.length}>
+          Download Selected
+        </button>
+        <button onClick={navigateToCreateDocument} className="btn-create-document">
+          Create Document
+        </button>
+      </div>
+
+      <div className="documents-table-container">
+        <table className="documents-table">
+          <thead>
+            <tr>
+              <th>
                 <input
                   type="checkbox"
-                  checked={selectedDocuments.includes(document.id)}
-                  onChange={() => handleSelectDocument(document.id)}
+                  checked={selectedDocuments.length === documents.length}
+                  onChange={handleSelectAll}
                 />
-              </td>
-              <td>
-                {documentImages[document.id] ? (
-                  <img
-                    src={documentImages[document.id]}
-                    alt={document.name}
-                    style={{ width: '50px', height: '50px' }}
-                  />
-                ) : (
-                  <p>Loading...</p>
-                )}
-              </td>
-              <td>{document.name}</td>
-              <td>{document.number}</td>
-              <td>{new Date(document.issueDate).toLocaleDateString()}</td>
-              <td>{document.expiryDate ? new Date(document.expiryDate).toLocaleDateString() : 'N/A'}</td>
-              <td>{getVerificationStatus(document.expiryDate)}</td>
-              <td>
-                <Link to={`/documents/${document.id}`}>View Details</Link>
-              </td>
+              </th>
+              <th>Preview</th>
+              <th>Name</th>
+              <th>Number</th>
+              <th>Issue Date</th>
+              <th>Expiry Date</th>
+              <th>Verification Status</th>
             </tr>
+          </thead>
+          <tbody>
+            {currentDocuments.map((document) => (
+              <tr key={document.id} className="document-row" onClick={() => handleRowClick(document.id)}>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={selectedDocuments.includes(document.id)}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      handleSelectDocument(document.id);
+                    }}
+                  />
+                </td>
+                <td>
+                  {documentImages[document.id] ? (
+                    <img
+                      src={documentImages[document.id]}
+                      alt={document.name}
+                      className="document-preview"
+                    />
+                  ) : (
+                    <p>Loading...</p>
+                  )}
+                </td>
+                <td>{document.name}</td>
+                <td>{document.number}</td>
+                <td>{new Date(document.issueDate).toLocaleDateString()}</td>
+                <td>{document.expiryDate ? new Date(document.expiryDate).toLocaleDateString() : 'N/A'}</td>
+                <td>{getVerificationStatus(document.expiryDate)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="documents-cards-container">
+        {currentDocuments.map((document) => (
+          <div key={document.id} className="document-card">
+            <div className="document-card-item">
+              {documentImages[document.id] ? (
+                <img
+                  src={documentImages[document.id]}
+                  alt={document.name}
+                  className="document-card-preview"
+                />
+              ) : (
+                <p>Loading...</p>
+              )}
+            </div>
+            <div className="document-card-item">
+              <span className="document-card-label">Name:</span>
+              <span className="document-card-value">{document.name}</span>
+            </div>
+            <div className="document-card-item">
+              <span className="document-card-label">Number:</span>
+              <span className="document-card-value">{document.number}</span>
+            </div>
+            <div className="document-card-item">
+              <span className="document-card-label">Issue Date:</span>
+              <span className="document-card-value">{new Date(document.issueDate).toLocaleDateString()}</span>
+            </div>
+            <div className="document-card-item">
+              <span className="document-card-label">Expiry Date:</span>
+              <span className="document-card-value">{document.expiryDate ? new Date(document.expiryDate).toLocaleDateString() : 'N/A'}</span>
+            </div>
+            <div className="document-card-item">
+              <span className="document-card-label">Verification Status:</span>
+              <span className="document-card-value">{getVerificationStatus(document.expiryDate)}</span>
+            </div>
+            <div className="document-card-item">
+              <button
+                onClick={() => handleSelectDocument(document.id)}
+                className={`document-card-select-btn ${selectedDocuments.includes(document.id) ? 'selected' : ''}`}
+              >
+                {selectedDocuments.includes(document.id) ? 'Deselect' : 'Select'}
+              </button>
+            </div>
+            <div className="document-card-item">
+              <button
+                onClick={() => navigate(`/documents/${document.id}`)}
+                className="document-card-edit-btn"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="pagination-container">
+        <select value={documentsPerPage} onChange={handleDocumentsPerPageChange} className="documents-per-page">
+          <option value="10">10 Documents | Page</option>
+          <option value="25">25 Documents | Page</option>
+          <option value="50">50 Documents | Page</option>
+        </select>
+        <div className="pagination">
+          {[...Array(totalPages)].map((_, index) => (
+            <button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              className={`page-button ${currentPage === index + 1 ? 'active' : ''}`}
+            >
+              {index + 1}
+            </button>
           ))}
-        </tbody>
-      </table>
+        </div>
+      </div>
     </div>
   );
 };

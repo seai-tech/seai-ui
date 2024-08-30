@@ -50,7 +50,7 @@ const Header = () => {
               Logout
             </button>
           ) : (
-            <Link className="side-nav-link" to="/login">Log In</Link>
+            <Link className="side-nav-link" to="/login">Login</Link>
           )}
         </div>
         <Link to="/" className="logo-link">

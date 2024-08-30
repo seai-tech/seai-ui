@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
 const Voyages = () => {
   const [voyages, setVoyages] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [voyagesPerPage, setVoyagesPerPage] = useState(10);
   const { userId, accessToken } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -42,46 +44,128 @@ const Voyages = () => {
     navigate('/voyages/create');
   };
 
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleVoyagesPerPageChange = (event) => {
+    setVoyagesPerPage(Number(event.target.value));
+    setCurrentPage(1);
+  };
+
+  const indexOfLastVoyage = currentPage * voyagesPerPage;
+  const indexOfFirstVoyage = indexOfLastVoyage - voyagesPerPage;
+  const currentVoyages = voyages.slice(indexOfFirstVoyage, indexOfLastVoyage);
+
+  const totalPages = Math.ceil(voyages.length / voyagesPerPage);
+
   return (
-    <div>
-      <h2>Voyages</h2>
-      <button onClick={handleAddNewVoyage} style={{ marginBottom: '10px' }}>Add New Voyage</button>
-      <table>
-        <thead>
-          <tr>
-            <th>Vessel Name</th>
-            <th>Vessel Type</th>
-            <th>Rank</th>
-            <th>IMO Number</th>
-            <th>Joining Port</th>
-            <th>Joining Date</th>
-            <th>Leaving Port</th>
-            <th>Leaving Date</th>
-            <th>Remarks</th>
-            <th>Flag</th>
-            <th>Edit</th>
-          </tr>
-        </thead>
-        <tbody>
-          {voyages.map((voyage) => (
-            <tr key={voyage.id}>
-              <td>{voyage.vesselName}</td>
-              <td>{voyage.vesselType}</td>
-              <td>{voyage.rank}</td>
-              <td>{voyage.imoNumber}</td>
-              <td>{voyage.joiningPort}</td>
-              <td>{new Date(voyage.joiningDate).toLocaleDateString()}</td>
-              <td>{voyage.leavingPort}</td>
-              <td>{voyage.leavingDate ? new Date(voyage.leavingDate).toLocaleDateString() : 'N/A'}</td>
-              <td>{voyage.remarks}</td>
-              <td>{voyage.flag}</td>
-              <td>
-                <button onClick={() => handleEdit(voyage)}>Edit</button>
-              </td>
+    <div className="voyages-container">
+      <h1>Voyages</h1>
+      <button onClick={handleAddNewVoyage} className="btn btn-add-voyage">Add New Voyage</button>
+      
+      <div className="voyages-table-container">
+        <table className="voyages-table">
+          <thead>
+            <tr>
+              <th>Vessel Name</th>
+              <th>Vessel Type</th>
+              <th>Rank</th>
+              <th>IMO Number</th>
+              <th>Joining Port</th>
+              <th>Joining Date</th>
+              <th>Leaving Port</th>
+              <th>Leaving Date</th>
+              <th>Remarks</th>
+              <th>Flag</th>
             </tr>
+          </thead>
+          <tbody>
+            {currentVoyages.map((voyage) => (
+              <tr key={voyage.id} onClick={() => handleEdit(voyage)} className="voyage-row">
+                <td>{voyage.vesselName}</td>
+                <td>{voyage.vesselType}</td>
+                <td>{voyage.rank}</td>
+                <td>{voyage.imoNumber}</td>
+                <td>{voyage.joiningPort}</td>
+                <td>{new Date(voyage.joiningDate).toLocaleDateString()}</td>
+                <td>{voyage.leavingPort}</td>
+                <td>{voyage.leavingDate ? new Date(voyage.leavingDate).toLocaleDateString() : 'N/A'}</td>
+                <td>{voyage.remarks}</td>
+                <td>{voyage.flag}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Render cards instead of table in responsive view */}
+      <div className="voyages-cards-container">
+        {currentVoyages.map((voyage) => (
+          <div key={voyage.id} className="voyage-card">
+            <div className="voyage-card-item">
+              <span className="voyage-card-label">Vessel Name:</span>
+              <span className="voyage-card-value">{voyage.vesselName}</span>
+            </div>
+            <div className="voyage-card-item">
+              <span className="voyage-card-label">Vessel Type:</span>
+              <span className="voyage-card-value">{voyage.vesselType}</span>
+            </div>
+            <div className="voyage-card-item">
+              <span className="voyage-card-label">Rank:</span>
+              <span className="voyage-card-value">{voyage.rank}</span>
+            </div>
+            <div className="voyage-card-item">
+              <span className="voyage-card-label">IMO Number:</span>
+              <span className="voyage-card-value">{voyage.imoNumber}</span>
+            </div>
+            <div className="voyage-card-item">
+              <span className="voyage-card-label">Joining Port:</span>
+              <span className="voyage-card-value">{voyage.joiningPort}</span>
+            </div>
+            <div className="voyage-card-item">
+              <span className="voyage-card-label">Joining Date:</span>
+              <span className="voyage-card-value">{new Date(voyage.joiningDate).toLocaleDateString()}</span>
+            </div>
+            <div className="voyage-card-item">
+              <span className="voyage-card-label">Leaving Port:</span>
+              <span className="voyage-card-value">{voyage.leavingPort}</span>
+            </div>
+            <div className="voyage-card-item">
+              <span className="voyage-card-label">Leaving Date:</span>
+              <span className="voyage-card-value">{voyage.leavingDate ? new Date(voyage.leavingDate).toLocaleDateString() : 'N/A'}</span>
+            </div>
+            <div className="voyage-card-item">
+              <span className="voyage-card-label">Remarks:</span>
+              <span className="voyage-card-value">{voyage.remarks}</span>
+            </div>
+            <div className="voyage-card-item">
+              <span className="voyage-card-label">Flag:</span>
+              <span className="voyage-card-value">{voyage.flag}</span>
+            </div>
+            <button onClick={() => handleEdit(voyage)} className="voyage-card-edit-btn">Edit Voyage</button>
+          </div>
+        ))}
+      </div>
+
+      <div className="pagination-container">
+        <select value={voyagesPerPage} onChange={handleVoyagesPerPageChange} className="voyages-per-page">
+          <option value="10">10 Voyages | Page</option>
+          <option value="25">25 Voyages | Page</option>
+          <option value="50">50 Voyages | Page</option>
+        </select>
+        <div className="pagination">
+          {[...Array(totalPages)].map((_, index) => (
+            <button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              className={`page-button ${currentPage === index + 1 ? 'active' : ''}`}
+            >
+              {index + 1}
+            </button>
           ))}
-        </tbody>
-      </table>
+        </div>
+      </div>
     </div>
   );
 };

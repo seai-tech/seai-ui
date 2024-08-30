@@ -8,7 +8,7 @@ import Contact from './pages-apis/base/Contact';
 import Login from './pages-apis/login-register/Login';
 import Register from './pages-apis/login-register/Register';
 import Profile from './pages-apis/profile/Profile';
-import ProfileUpdate from './pages-apis/profile/ProfileUpdate';
+// import ProfileUpdate from './pages-apis/profile/ProfileUpdate';
 import Voyages from './pages-apis/voyages/Voyages';
 import VoyageCreate from './pages-apis/voyages/VoyageCreate';
 import VoyageUpdate from './pages-apis/voyages/VoyageUpdate';
@@ -32,7 +32,7 @@ function App() {
           <Route path="/register" element={<Register />} />
 
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
-          <Route path="/profile/:userId/edit" element={<PrivateRoute><ProfileUpdate /></PrivateRoute>} />
+          {/* <Route path="/profile/:userId/edit" element={<PrivateRoute><ProfileUpdate /></PrivateRoute>} /> */}
 
           <Route path="/voyages" element={<PrivateRoute><Voyages /></PrivateRoute>} />
           <Route path="/voyages/create" element={<PrivateRoute><VoyageCreate /></PrivateRoute>} />

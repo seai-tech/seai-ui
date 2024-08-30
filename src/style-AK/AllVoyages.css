@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+.voyages-container {
+    max-width: 1200px;
+    margin:auto;
+    padding: 20px;
+    font-family: 'Oswald', sans-serif;
+    color: #003366;
+}
+
+.voyages-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #003366;
+}
+
+.btn-add-voyage {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 10px 20px;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    color: #4CAF50;
+    background-color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-add-voyage:hover {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.voyages-table-container {
+    border: 1px solid #4774e6;
+    border-radius: 5px;
+    overflow-x: auto;
+    background-color: #fff;
+    display: block; /* Ensure the table is shown by default */
+}
+
+.voyages-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.voyages-table th {
+    background-color: #4774e6; /* Blue background color */
+    color: #fff; /* White font color */
+    padding: 10px;
+    text-align: left;
+    font-size: 16px;
+}
+
+.voyages-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #4774e6; /* Only bottom border */
+    font-size: 16px;
+}
+
+.voyage-row {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.voyage-row:hover {
+    background-color: #f0f8ff; /* Light blue hover effect */
+}
+
+/* Remove border-bottom from the last row's cells */
+.voyages-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.voyages-cards-container {
+    display: none; /* Hide the cards by default */
+}
+
+/* Pagination Styling */
+.pagination-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.voyages-per-page {
+    padding: 10px;
+    border: 1px solid #4774e6;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.pagination {
+    display: flex;
+    gap: 5px;
+}
+
+.page-button {
+    padding: 10px 15px;
+    border: 1px solid #4774e6;
+    border-radius: 5px;
+    color: #4774e6;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.page-button.active, .page-button:hover {
+    background-color: #4774e6;
+    color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .voyages-table-container {
+        display: none; /* Hide the table on smaller screens */
+    }
+
+    .voyages-cards-container {
+        display: flex; /* Show the cards on smaller screens */
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .voyage-card {
+        border: 1px solid #4774e6;
+        border-radius: 5px;
+        padding: 15px;
+        background-color: #fff;
+    }
+
+    .voyage-card-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .voyage-card-label {
+        font-weight: bold;
+        color: #003366;
+    }
+
+    .voyage-card-value {
+        color: #003366;
+    }
+
+    .voyage-card-edit-btn {
+        padding: 10px 20px;
+        border: 1px solid #4774e6;
+        border-radius: 5px;
+        color: #4774e6;
+        background-color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        width: 100%;
+        text-align: center;
+    }
+
+    .voyage-card-edit-btn:hover {
+        background-color: #4774e6;
+        color: #fff;
+    }
+
+    .pagination-container {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .pagination {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .pagination .page-button {
+        flex: 1;
+        text-align: center;
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .voyages-per-page {
+        width: 100%;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+}

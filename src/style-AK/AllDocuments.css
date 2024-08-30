@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+.documents-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    font-family: 'Oswald', sans-serif;
+    color: #003366;
+}
+
+.documents-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #003366;
+}
+
+.document-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.btn-download-selected {
+    padding: 10px 20px;
+    border: 1px solid #4774e6;
+    border-radius: 5px;
+    color: #4774e6;
+    background-color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-download-selected:hover {
+    background-color: #4774e6;
+    color: #fff;
+}
+
+.btn-create-document {
+    padding: 10px 20px;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    color: #4CAF50;
+    background-color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-create-document:hover {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.documents-table-container {
+    border: 1px solid #4774e6;
+    border-radius: 5px;
+    overflow-x: auto;
+    background-color: #fff;
+    display: block;
+}
+
+.documents-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.documents-table th {
+    background-color: #4774e6;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+    font-size: 16px;
+}
+
+.documents-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #4774e6;
+    font-size: 16px;
+}
+
+.document-row {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.document-row:hover {
+    background-color: #f0f8ff;
+}
+
+.documents-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.document-preview {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Pagination Styling */
+.pagination-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.documents-per-page {
+    padding: 10px;
+    border: 1px solid #4774e6;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.pagination {
+    display: flex;
+    gap: 5px;
+}
+
+.page-button {
+    padding: 10px 15px;
+    border: 1px solid #4774e6;
+    border-radius: 5px;
+    color: #4774e6;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.page-button.active,
+.page-button:hover {
+    background-color: #4774e6;
+    color: #fff;
+}
+
+.documents-cards-container {
+    display: none;
+    /* Hide the cards by default */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .documents-table-container {
+        display: none;
+        /* Hide the table on smaller screens */
+    }
+
+    .documents-cards-container {
+        display: flex;
+        /* Show the cards on smaller screens */
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .document-card {
+        border: 1px solid #4774e6;
+        border-radius: 5px;
+        padding: 15px;
+        background-color: #fff;
+    }
+
+    .document-card-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .document-card-preview {
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .document-card-label {
+        font-weight: bold;
+        color: #003366;
+    }
+
+    .document-card-value {
+        color: #003366;
+    }
+
+    .document-card-select-btn {
+        padding: 10px 20px;
+        border: 1px solid #4774e6;
+        border-radius: 5px;
+        color: #4774e6;
+        background-color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        width: 100%;
+        text-align: center;
+    }
+
+    .document-card-select-btn.selected {
+        background-color: #4774e6;
+        color: #fff;
+    }
+
+    .document-card-edit-btn {
+        padding: 10px 20px;
+        border: 1px solid #4CAF50;
+        border-radius: 5px;
+        color: #4CAF50;
+        background-color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        width: 100%;
+        text-align: center;
+    }
+
+    .document-card-edit-btn:hover {
+        background-color: #4CAF50;
+        color: #fff;
+    }
+}

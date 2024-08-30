@@ -65,6 +65,7 @@
     padding-top: 60px;
     top: 0;
     left: 0;
+    padding-bottom: 40px; 
 }
 
 /* Sidebar link styling */
@@ -120,15 +121,15 @@
 /* Logo at the bottom of the sidebar */
 .side-nav .logo-link {
     position: absolute;
-    bottom: 120px;
     left: 50%;
+    margin-top: auto;
+    padding-top: 80px;
     transform: translateX(-50%);
 }
 
 /* Sidebar logo styling */
 .side-nav-logo {
     height: 9vh;
-    transition: all 0.3s ease;
 }
 
 @media (max-width: 768px) {

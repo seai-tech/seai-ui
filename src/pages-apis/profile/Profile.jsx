@@ -144,107 +144,181 @@ const Profile = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Personal Information</h2>
-      
-      <div>
-        <label htmlFor="firstName">First name:</label>
-        <input type="text" name="firstName" id="firstName" value={userData.firstName} onChange={handleInputChange} />
-      </div>
+    <div className='profile-body'>
+      <form onSubmit={handleSubmit}>
+        <div className="personal-information">
+          <h2>Personal Information <i className="fa-solid fa-user"></i></h2>
+          
+          <div className="form-group-inline">
+            <div>
+              <label htmlFor="firstName">First name:</label>
+              <input
+                type="text"
+                id="first-name"
+                name="firstName"
+                value={userData.firstName}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="lastName">Last name:</label>
+              <input
+                type="text"
+                id="last-name"
+                name="lastName"
+                value={userData.lastName}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
 
-      <div>
-        <label htmlFor="lastName">Last name:</label>
-        <input type="text" id="lastName" name="lastName" value={userData.lastName} onChange={handleInputChange} />
-      </div>
+          <div className="form-group">
+            <label htmlFor="dateOfBirth">Date of Birth:</label>
+            <input
+              type="date"
+              id="dob"
+              name="dateOfBirth"
+              value={userData.dateOfBirth ? new Date(userData.dateOfBirth).toISOString().split('T')[0] : ''}
+              onChange={handleInputChange}
+            />
+          </div>
 
-      <div>
-        <label htmlFor="dateOfBirth">Date of Birth:</label>
-        <input
-          type="date"
-          id="dateOfBirth"
-          name="dateOfBirth"
-          value={userData.dateOfBirth ? new Date(userData.dateOfBirth).toISOString().split('T')[0] : ''}
-          onChange={handleInputChange}
-        />
-      </div>
+          <div className="form-group-inline">
+            <div>
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={userData.email}
+                disabled
+              />
+            </div>
+            <div>
+              <label htmlFor="phone">Phone number:</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={userData.phone}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
 
-      <div>
-        <label htmlFor="phone">Phone number:</label>
-        <input type="tel" id="phone" name="phone" value={userData.phone} onChange={handleInputChange} />
-      </div>
+          <div className="form-group">
+            <label htmlFor="homeAirport">Home airport:</label>
+            <input
+              type="text"
+              id="home-airport"
+              name="homeAirport"
+              value={userData.homeAirport}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
 
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" value={userData.email} disabled /> {/* Disabled email field */}
-      </div>
+        <div className="additional-information">
+          <h2>Additional Information <i className="fa-solid fa-circle-info"></i></h2>
 
-      <div>
-        <label htmlFor="homeAirport">Home airport:</label>
-        <input type="text" id="homeAirport" name="homeAirport" value={userData.homeAirport} onChange={handleInputChange} />
-      </div>
+          <div className="form-group-inline">
+            <div>
+              <label htmlFor="readinessDate">Readiness date:</label>
+              <input
+                type="date"
+                id="readiness-date"
+                name="readinessDate"
+                value={userData.readinessDate ? new Date(userData.readinessDate).toISOString().split('T')[0] : ''}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="contractDuration">Contract duration (months):</label>
+              <input
+                type="number"
+                id="contract-duration"
+                name="contractDuration"
+                value={userData.contractDuration}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
 
-      <div>
-        <label htmlFor="readinessDate">Readiness date:</label>
-        <input
-          type="date"
-          id="readinessDate"
-          name="readinessDate"
-          value={userData.readinessDate ? new Date(userData.readinessDate).toISOString().split('T')[0] : ''}
-          onChange={handleInputChange}
-        />
-      </div>
+          <div className="form-group-inline">
+            <div>
+              <label htmlFor="rank">Rank:</label>
+              <select
+                id="rank"
+                name="rank"
+                value={userData.rank}
+                onChange={handleInputChange}
+              >
+                {Object.keys(rankOptions).map((role) => (
+                  <option key={rankOptions[role]} value={rankOptions[role]}>
+                    {role}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="vesselType">Vessel type:</label>
+              <select
+                id="vessel-type"
+                name="vesselType"
+                value={userData.vesselType}
+                onChange={handleInputChange}
+              >
+                {Object.keys(vesselTypeOptions).map((type) => (
+                  <option key={vesselTypeOptions[type]} value={vesselTypeOptions[type]}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="status">Status:</label>
+              <select
+                id="status"
+                name="status"
+                value={userData.status}
+                onChange={handleInputChange}
+              >
+                <option value="HOME">Home</option>
+                <option value="ONBOARD">On Board</option>
+              </select>
+            </div>
+          </div>
 
-      <div>
-        <label htmlFor="contractDuration">Contract duration (months):</label>
-        <input type="number" id="contractDuration" name="contractDuration" value={userData.contractDuration} onChange={handleInputChange} />
-      </div>
+          <div className="form-group">
+            <label htmlFor="presentEmployer">Present employer:</label>
+            <input
+              type="text"
+              id="employer"
+              name="presentEmployer"
+              value={userData.presentEmployer}
+              onChange={handleInputChange}
+            />
+          </div>
 
-      <div>
-        <label htmlFor="rank">Rank:</label>
-        <select id="rank" name="rank" value={userData.rank} onChange={handleInputChange}>
-          {Object.keys(rankOptions).map((role) => (
-            <option key={rankOptions[role]} value={rankOptions[role]}>
-              {role}
-            </option>
-          ))}
-        </select>
-      </div>
+          <div className="form-group">
+            <label htmlFor="manningAgents">Manning agents:</label>
+            <input
+              type="text"
+              id="manning-agents"
+              name="manningAgents"
+              value={userData.manningAgents}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
 
-      <div>
-        <label htmlFor="vesselType">Vessel type:</label>
-        <select id="vesselType" name="vesselType" value={userData.vesselType} onChange={handleInputChange}>
-          {Object.keys(vesselTypeOptions).map((type) => (
-            <option key={vesselTypeOptions[type]} value={vesselTypeOptions[type]}>
-              {type}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <label htmlFor="status">Status:</label>
-        <select id="status" name="status" value={userData.status} onChange={handleInputChange}>
-          <option value="HOME">Home</option>
-          <option value="ONBOARD">On Board</option>
-        </select>
-      </div>
-
-      <div>
-        <label htmlFor="presentEmployer">Present employer:</label>
-        <input type="text" id="presentEmployer" name="presentEmployer" value={userData.presentEmployer} onChange={handleInputChange} />
-      </div>
-
-      <div>
-        <label htmlFor="manningAgents">Manning agents:</label>
-        <input type="text" id="manningAgents" name="manningAgents" value={userData.manningAgents} onChange={handleInputChange} />
-      </div>
-
-      <div>
-        <button type="submit">Save Changes</button>
-        <button type="button" onClick={handleDelete}>Delete Profile</button>
-        <button type="button" onClick={handleDownloadPDF}>Download PDF</button>
-      </div>
-    </form>
+        <div className="buttons">
+          <button type="submit" className="btn btn-update">Update <i className="fa-solid fa-pen-to-square"></i></button>
+          <button type="button" onClick={handleDelete} className="btn btn-delete">Delete <i className="fa-solid fa-delete-left"></i></button>
+          <button type="button" onClick={handleDownloadPDF} className="btn btn-download">Download <i className="fa-solid fa-file-arrow-down"></i></button>
+        </div>
+      </form>
+    </div>
   );
 };
 

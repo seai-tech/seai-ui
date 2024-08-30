@@ -50,9 +50,9 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <h2>Register</h2>
+    <div className="register-body">
+      <form onSubmit={handleSubmit} className="register-form">
+        <h1>Register</h1>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {loading && <p>Loading...</p>}
         <div>
@@ -76,19 +76,25 @@ const Register = () => {
           <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleInputChange} required />
         </div>
 
-        <div>
+        <div className="gdpr-container">
           <input
             type="checkbox"
             name="gdprAccepted"
             checked={formData.gdprAccepted}
             onChange={handleInputChange}
+            id="gdprAccepted"
+            className="custom-checkbox"
           />
-          <label>I have read and accept the <a href="https://app.seai.co/assets/assets/gdpr.bc1effe864ae8eaf453c51a451fb1aee.pdf?platform=web&hash=bc1effe864ae8eaf453c51a451fb1aee" target="_blank" rel="noopener noreferrer">GDPR policy</a></label>
+          <label htmlFor="gdprAccepted">
+            I have read and accept the <a href="https://app.seai.co/assets/assets/gdpr.bc1effe864ae8eaf453c51a451fb1aee.pdf?platform=web&hash=bc1effe864ae8eaf453c51a451fb1aee" target="_blank" rel="noopener noreferrer">GDPR policy</a>
+          </label>
         </div>
         <button type="submit" disabled={loading}>Register</button>
+        <p>Already have an account? <a href="/login">Login</a></p>
       </form>
-      <p>Already have an account? <a href="/login">Login</a></p>
+
     </div>
+
   );
 };
 

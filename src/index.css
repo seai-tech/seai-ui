@@ -1,11 +1,17 @@
 /* Correct @import statements */
 @import url('./style-AK/Header.css');
 @import url('./style-AK/Footer.css');
+@import url('./style-AK/Profile.css');
+@import url('./style-AK/Login.css');
+@import url('./style-AK/Register.css');
+@import url('./style-AK/AllVoyages.css');
+@import url('./style-AK/AllDocuments.css');
 
 /* Other CSS rules go below the @import statements */
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    box-sizing: border-box;
 }
 
