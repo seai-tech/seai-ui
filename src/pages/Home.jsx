@@ -10,7 +10,6 @@ import puzzle from '../assets/6.png';
 import timeManagement from '../assets/time-management.png';
 import dataScience from '../assets/data-science.png';
 import analysis from '../assets/analysis.png';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 

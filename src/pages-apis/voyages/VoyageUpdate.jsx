@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { vesselTypeOptions, rankOptions } from '../../constants';
-
+import Loading from '../../components-redo/Loading';
 
 const VoyageUpdate = () => {
   const { voyageId } = useParams();
@@ -96,136 +96,122 @@ const VoyageUpdate = () => {
     }
   };
 
+  if (loading) {
+    return <Loading />;
+  }
+
   if (!voyage) {
     return <p>Loading voyage data...</p>;
   }
 
   return (
-    <div>
-      <h2>Edit Voyage</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form>
-        <div>
-          <label>
-            Vessel Name:
-            <input
-              type="text"
-              name="vesselName"
-              value={voyageData.vesselName}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
+    <div className="voyage-update-container">
+      <h1>Voyage IMO №{voyage.imoNumber}</h1>
+      {error && <p className="error-message">{error}</p>}
+      <form className="voyage-update-form">
+        <div className="form-group">
+          <label>Vessel Name:</label>
+          <input
+            type="text"
+            name="vesselName"
+            value={voyageData.vesselName}
+            onChange={handleInputChange}
+            required
+          />
         </div>
-        <div>
-          <label>
-            Vessel Type:
-            <select name="vesselType" value={voyageData.vesselType} onChange={handleInputChange} required>
-              <option value="">Select Vessel Type</option>
-              {Object.keys(vesselTypeOptions).map((type) => (
-                <option key={type} value={type}>{type}</option>
-              ))}
-            </select>
-          </label>
+        <div className="form-group">
+          <label>Vessel Type:</label>
+          <select name="vesselType" value={voyageData.vesselType} onChange={handleInputChange} required>
+            <option value="">Select Vessel Type</option>
+            {Object.keys(vesselTypeOptions).map((type) => (
+              <option key={type} value={type}>{type}</option>
+            ))}
+          </select>
         </div>
-        <div>
-          <label>
-            Rank:
-            <select name="rank" value={voyageData.rank} onChange={handleInputChange} required>
-              <option value="">Select Rank</option>
-              {Object.keys(rankOptions).map((role) => (
-                <option key={role} value={role}>{role}</option>
-              ))}
-            </select>
-          </label>
+        <div className="form-group">
+          <label>Rank:</label>
+          <select name="rank" value={voyageData.rank} onChange={handleInputChange} required>
+            <option value="">Select Rank</option>
+            {Object.keys(rankOptions).map((role) => (
+              <option key={role} value={role}>{role}</option>
+            ))}
+          </select>
         </div>
-        <div>
-          <label>
-            IMO Number:
-            <input
-              type="text"
-              name="imoNumber"
-              value={voyageData.imoNumber}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
+        <div className="form-group">
+          <label>IMO Number:</label>
+          <input
+            type="text"
+            name="imoNumber"
+            value={voyageData.imoNumber}
+            onChange={handleInputChange}
+            required
+          />
         </div>
-        <div>
-          <label>
-            Joining Port:
-            <input
-              type="text"
-              name="joiningPort"
-              value={voyageData.joiningPort}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
+        <div className="form-group">
+          <label>Joining Port:</label>
+          <input
+            type="text"
+            name="joiningPort"
+            value={voyageData.joiningPort}
+            onChange={handleInputChange}
+            required
+          />
         </div>
-        <div>
-          <label>
-            Joining Date:
-            <input
-              type="date"
-              name="joiningDate"
-              value={voyageData.joiningDate}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
+        <div className="form-group">
+          <label>Joining Date:</label>
+          <input
+            type="date"
+            name="joiningDate"
+            value={voyageData.joiningDate}
+            onChange={handleInputChange}
+            required
+          />
         </div>
-        <div>
-          <label>
-            Leaving Port:
-            <input
-              type="text"
-              name="leavingPort"
-              value={voyageData.leavingPort}
-              onChange={handleInputChange}
-            />
-          </label>
+        <div className="form-group">
+          <label>Leaving Port:</label>
+          <input
+            type="text"
+            name="leavingPort"
+            value={voyageData.leavingPort}
+            onChange={handleInputChange}
+          />
         </div>
-        <div>
-          <label>
-            Leaving Date:
-            <input
-              type="date"
-              name="leavingDate"
-              value={voyageData.leavingDate}
-              onChange={handleInputChange}
-            />
-          </label>
+        <div className="form-group">
+          <label>Leaving Date:</label>
+          <input
+            type="date"
+            name="leavingDate"
+            value={voyageData.leavingDate}
+            onChange={handleInputChange}
+          />
         </div>
-        <div>
-          <label>
-            Remarks:
-            <input
-              type="text"
-              name="remarks"
-              value={voyageData.remarks}
-              onChange={handleInputChange}
-            />
-          </label>
+        <div className="form-group">
+          <label>Remarks:</label>
+          <input
+            type="text"
+            name="remarks"
+            value={voyageData.remarks}
+            onChange={handleInputChange}
+          />
         </div>
-        <div>
-          <label>
-            Flag:
-            <input
-              type="text"
-              name="flag"
-              value={voyageData.flag}
-              onChange={handleInputChange}
-              required
-            />
-          </label>
+        <div className="form-group">
+          <label>Flag:</label>
+          <input
+            type="text"
+            name="flag"
+            value={voyageData.flag}
+            onChange={handleInputChange}
+            required
+          />
         </div>
-        <button type="button" onClick={handleUpdate} disabled={loading}>
-          {loading ? 'Updating...' : 'Update Voyage'}
-        </button>
-        <button type="button" onClick={handleDelete} disabled={loading}>
-          {loading ? 'Deleting...' : 'Delete Voyage'}
-        </button>
+        <div className="buttons-container">
+          <button type="button" className="btn-update" onClick={handleUpdate} disabled={loading}>
+            <i className="fa-solid fa-pen-to-square"></i> {loading ? 'Updating...' : 'Update'}
+          </button>
+          <button type="button" className="btn-delete" onClick={handleDelete} disabled={loading}>
+            <i className="fa-solid fa-delete-left"></i> {loading ? 'Deleting...' : 'Delete'}
+          </button>
+        </div>
       </form>
     </div>
   );

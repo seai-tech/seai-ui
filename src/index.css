@@ -1,22 +1,24 @@
-/* Correct @import statements */
 @import url('./style-AK/Loading.css');
 
 @import url('./style-AK/Header.css');
 @import url('./style-AK/Footer.css');
+
+@import url('./style-AK/Home.css');
 
 @import url('./style-AK/Profile.css');
 
 @import url('./style-AK/Login.css');
 @import url('./style-AK/Register.css');
 
+@import url('./style-AK/Voyage.css');
 @import url('./style-AK/Voyages.css');
+@import url('./style-AK/VoyageCreate.css');
 
 @import url('./style-AK/Document.css');
 @import url('./style-AK/DocumentCreate.css');
 @import url('./style-AK/Documents.css');
 
 
-/* Other CSS rules go below the @import statements */
 body {
     margin: 0;
     padding: 0;

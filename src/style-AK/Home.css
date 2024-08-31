@@ -1,0 +1,170 @@
+/* Import the font */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Oswald', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* General styles for the container */
+.home-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+  margin: 0 200px; /* Margin on the sides */
+}
+
+/* First Section */
+.home-first-section {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home-text-section {
+  max-width: 50%;
+}
+
+.home-heading {
+  font-size: 2.5rem;
+  color: #003366;
+  margin-bottom: 20px;
+}
+
+.home-description {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #003366;
+}
+
+.home-image-section {
+  max-width: 45%;
+}
+
+.home-wheel-image {
+  margin-top: 55px;
+  margin-left: 150px;
+  width: 60%;
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Section Title */
+.home-section-title {
+  font-size: 2rem;
+  color: #003366;
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+  margin: 50px 0 20px;
+}
+
+/* Advantages Section */
+.home-advantages-section {
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+.home-card {
+  flex-basis: 30%;
+  background-color: #f0f8ff; /* Light blue background */
+  border-radius: 10px;
+  padding: 10px; /* Reduced padding */
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.home-card-image {
+  max-width: 50px;
+  margin-bottom: 10px;
+}
+
+.home-card-content h3 {
+  font-size: 1.2rem;
+  color: #003366;
+}
+
+/* SeAI Enables YOU Section */
+.home-seai-enables-section {
+  justify-content: space-around;
+}
+
+.home-enable-card {
+  text-align: center;
+  flex-basis: 30%;
+  margin-bottom: 20px;
+}
+
+.home-enable-card-image {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+/* Button Section */
+.home-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 50px; /* Added margin at the bottom */
+}
+
+.home-book-demo-button {
+  background-color: white; /* White background */
+  border-color: #4CAF50; /* Green border */
+  color: #4CAF50; /* Green font */
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid #4CAF50; /* Matching border color */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.home-book-demo-button:hover {
+  background-color: #4CAF50; /* Green background on hover */
+  border-color: #4CAF50; /* Green border on hover */
+  color: white; /* White text on hover */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .home-container {
+    flex-direction: column;
+    margin: 0 20px; /* Adjusted margin for mobile */
+  }
+
+  .home-first-section {
+    flex-direction: column;
+  }
+
+  .home-text-section,
+  .home-image-section {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .home-wheel-image {
+    margin: 20px 0;
+  }
+
+  .home-advantages-section,
+  .home-seai-enables-section {
+    flex-direction: column;
+  }
+
+  .home-card,
+  .home-enable-card {
+    flex-basis: 100%;
+    margin-bottom: 20px;
+  }
+}

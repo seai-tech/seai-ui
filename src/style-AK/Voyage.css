@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+.voyage-update-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    font-family: 'Oswald', sans-serif;
+    color: #003366;
+    border: 1px solid #4774e6;
+    border-radius: 7px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.voyage-update-container h1 {
+    margin-top: 0;
+    text-align: left;
+    margin-bottom: 20px;
+    color: #003366;
+    border-bottom: 2px solid #003366;
+    padding-bottom: 3px;
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 20px;
+}
+
+.voyage-update-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    color: #003366;
+    font-size: 18px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #4774e6;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.buttons-container {
+    display: flex;
+    /* justify-content: flex-end; */
+}
+
+.btn-update {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #4CAF50;
+    color: #4CAF50;
+    background-color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-update:hover {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.btn-delete {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #f44336;
+    color: #f44336;
+    background-color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 850px) {
+    .voyage-update-container {
+        margin: 50px 15px;
+        padding: 15px;
+    }
+
+    .buttons-container {
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .btn-update, .btn-delete {
+        width: 100%;
+    }
+}

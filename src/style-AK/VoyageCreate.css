@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+.create-voyage-container {
+    max-width: 760px;
+    margin: 50px auto;
+    padding: 20px;
+    font-family: 'Oswald', sans-serif;
+    color: #003366;
+    border: 1px solid #4774e6;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-voyage-container h1 {
+    text-align: center;
+    color: #003366;
+    margin-bottom: 20px;
+}
+
+.create-voyage-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-voyage-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.create-voyage-form label {
+    color: #003366;
+    font-size: 18px;
+}
+
+.create-voyage-form input[type="text"],
+.create-voyage-form input[type="date"],
+.create-voyage-form select {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: 1px solid #4774e6;
+}
+
+.create-voyage-form select {
+    appearance: none;
+    background: url('data:image/svg+xml;charset=UTF-8,%3Csvg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M20 50l50 50 50-50z" fill="%234774e6" /%3E%3C/svg%3E') no-repeat right 10px center;
+    background-size: 10px;
+}
+
+.create-voyage-form button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid #4CAF50;
+    color: #4CAF50;
+    background-color: #fff;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.create-voyage-form button:hover {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .create-voyage-container {
+        padding: 5px;
+        padding-bottom: 20px;
+        margin: 50px 15px;
+    }
+
+    .create-voyage-form {
+        padding: 0 10px;
+    }
+}

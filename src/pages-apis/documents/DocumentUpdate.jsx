@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { saveAs } from 'file-saver';
+import Loading from '../../components-redo/Loading';
 
 const DocumentUpdate = () => {
   const { documentId } = useParams();
@@ -107,7 +108,7 @@ const DocumentUpdate = () => {
       });
 
       if (response.ok) {
-        navigate(`/documents/${documentId}`);
+        navigate(`/documents/${documentId}/update`);
       } else {
         setError('Failed to update document');
       }
@@ -190,7 +191,7 @@ const DocumentUpdate = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (error) {
@@ -198,10 +199,10 @@ const DocumentUpdate = () => {
   }
 
   return (
-    <div className='single-document'>
-      
-      <div className="document-update-container">
+
+    <div className="document-update-container">
       <h1>Document №{document.number}</h1>
+      <div className="document-data-section">
         <div className="image-container">
           {imageUrl && (
             <div>
@@ -264,9 +265,9 @@ const DocumentUpdate = () => {
             />
           </label>
           <div className="buttons-container">
-            <button className="button-update" onClick={handleUpdate}>Update</button>
-            <button className="button-download" onClick={downloadImage}>Download</button>
-            <button className="button-delete" onClick={handleDeleteDocument}>Delete</button>
+            <button className="button-update" onClick={handleUpdate}><i className="fa-solid fa-pen-to-square"></i> Update</button>
+            <button className="button-delete" onClick={handleDeleteDocument}><i className="fa-solid fa-delete-left"></i> Delete</button>
+            <button className="button-download" onClick={downloadImage}><i className="fa-solid fa-file-arrow-down"></i> Download</button>
           </div>
         </div>
       </div>

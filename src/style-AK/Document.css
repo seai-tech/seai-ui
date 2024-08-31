@@ -1,26 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
 
-.single-document h1 {
-    text-align: center;
+.document-update-container h1 {
+    margin-top: 0px;
     margin-bottom: 20px;
-    color: #003366;
+    color: #003366; /* Font color */
     font-family: 'Oswald', sans-serif;
+    border-bottom: 2px solid #003366; /* Bottom border with the same color as the font */
+    padding-bottom: 0px;    
 }
 
 .document-update-container {
+    display: flex;
+    flex-direction: column;
     max-width: 1000px;
-    margin: 20px auto; /* Added margin for some space on the sides */
+    margin: 50px auto;
     margin-bottom: 60px;
     padding: 20px;
     font-family: 'Oswald', sans-serif;
     color: #003366;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
     border: 1px solid #4774e6;
     border-radius: 7px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Container for the document update form */
+.document-data-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .image-container {
@@ -68,13 +76,12 @@
 }
 
 .form-container {
-    flex: 2;
+    flex: 1;
     max-width: 600px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 20px; /* Added padding to the form */
-    border-radius: 7px;
+    padding-left: 20px; 
 }
 
 .form-container label {
@@ -95,7 +102,7 @@
 
 .buttons-container {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     margin-top: 20px;
     justify-content: flex-end;
 }
@@ -143,22 +150,24 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
     .document-update-container {
+        margin: 50px 15px
+    }
+
+    .document-data-section {
         display: block;
-        padding: 0;
-        align-items: center;
-        margin: 10px; /* Added margin to the sides of the container */
-        margin-bottom: 40px;
     }
 
     .image-container {
         max-width: 100%;
-        padding: 20px;
     }
 
     .form-container {
         max-width: 100%;
+        display: flex;
+        gap: 5px;
+        padding-left: 0px; 
     }
 
     .form-container input[type="text"],

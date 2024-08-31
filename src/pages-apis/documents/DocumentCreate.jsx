@@ -83,7 +83,7 @@ const CreateDocument = () => {
 
   return (
     <div className="create-document-container">
-      <h1>Create New Document</h1>
+      <h1>Create Document</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit} className="create-document-form">
         <div className="form-group">
@@ -130,39 +130,42 @@ const CreateDocument = () => {
           </label>
         </div>
 
-        {!imagePreview && (
-          <div className="form-group">
-            <label>
-              Image:
+        <div className="form-group">
+          <label>Image:</label>
+          {!imagePreview && (
+            <div className="image-upload-placeholder" onClick={() => fileInputRef.current.click()}>
+              <i className="fa-solid fa-upload upload-icon"></i>&nbsp;<h2 className="upload-text">Upload Image</h2>
               <input
                 type="file"
                 accept="image/*"
+                ref={fileInputRef}
                 onChange={handleImageChange}
+                style={{ display: 'none' }}
                 required
               />
-            </label>
-          </div>
-        )}
+            </div>
+          )}
 
-        {imagePreview && (
-          <div className="image-preview-container">
-            <img src={imagePreview} alt="Preview" className="image-preview" />
-            <button
-              type="button"
-              onClick={() => fileInputRef.current.click()}
-              className="change-image-button"
-            >
-              <i className="fas fa-camera"></i> Change Photo
-            </button>
-            <input
-              type="file"
-              ref={fileInputRef}
-              accept="image/*"
-              onChange={handleImageChange}
-              style={{ display: 'none' }}
-            />
-          </div>
-        )}
+          {imagePreview && (
+            <div className="image-preview-container">
+              <img src={imagePreview} alt="Preview" className="image-preview" />
+              <button
+                type="button"
+                onClick={() => fileInputRef.current.click()}
+                className="change-image-button"
+              >
+                <i className="fas fa-camera"></i> Change Image
+              </button>
+              <input
+                type="file"
+                ref={fileInputRef}
+                accept="image/*"
+                onChange={handleImageChange}
+                style={{ display: 'none' }}
+              />
+            </div>
+          )}
+        </div>
 
         <button type="submit" disabled={loading} className="btn-create-one-document">
           {loading ? 'Creating...' : 'Create Document'}

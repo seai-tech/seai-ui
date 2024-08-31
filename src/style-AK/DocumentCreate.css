@@ -9,6 +9,7 @@
     border: 1px solid #4774e6; /* Only border around the container */
     border-radius: 5px;
     background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .create-document-container h1 {
@@ -20,14 +21,14 @@
 .create-document-form {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0px;
 }
-
-
 
 .form-group label {
     color: #003366;
     font-size: 18px;
+    margin-bottom: 8px; /* Add some space below the label */
+    display: block;
 }
 
 .form-group input[type="text"],
@@ -38,6 +39,34 @@
     font-size: 16px;
 }
 
+.image-upload-placeholder {
+    width: 99%;
+    height: 200px;
+    border: 2px dashed #4774e6;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+.image-upload-placeholder:hover {
+    background-color: #f0f8ff;
+}
+
+.upload-icon {
+    font-size: 24px;
+    color: #003366;
+}
+
+.upload-text {
+    font-size: 24px; /* Make sure the text is the same size as the icon */
+    color: #003366;
+    margin-left: 5px;
+}
+
 .image-preview-container {
     position: relative;
     display: flex;
@@ -45,6 +74,8 @@
     align-items: center;
     margin-top: 20px;
 }
+
+
 
 .image-preview {
     max-width: 100%;
@@ -107,11 +138,11 @@
     .create-document-form {
         display: block;
         gap: 0;
-        padding: 0px;
+        padding: 0px 15px;
     }
     .create-document-container {
         padding: 0px;
-        margin: 50px 10px;
+        margin: 50px 15px;
         display: block;
     }
 

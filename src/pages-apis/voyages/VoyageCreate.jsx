@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { vesselTypeOptions, rankOptions } from '../../constants';
+import Loading from '../../components-redo/Loading';
 
 const CreateVoyage = () => {
   const { userId, accessToken } = useContext(AuthContext);
@@ -19,10 +20,9 @@ const CreateVoyage = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-
   const formatDateForAPI = (date) => {
     const dt = new Date(date);
-    return dt.toISOString();  // Converts to ISO 8601 format: "YYYY-MM-DDTHH:MM:SS.sssZ"
+    return dt.toISOString();
   };
 
   const handleSubmit = async (e) => {
@@ -48,8 +48,6 @@ const CreateVoyage = () => {
       flag,
     };
 
-    console.log('Voyage Data being sent:', JSON.stringify(voyageData, null, 2));
-
     try {
       const response = await fetch(`https://api.seai.co/api/v1/users/${userId}/voyages`, {
         method: 'POST',
@@ -65,7 +63,6 @@ const CreateVoyage = () => {
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Failed to create voyage');
-        console.error('Error response from API:', errorData);
       }
     } catch (err) {
       setError('An error occurred. Please try again.');
@@ -75,12 +72,17 @@ const CreateVoyage = () => {
     }
   };
 
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
-    <div>
-      <h2>Add New Voyage</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
+    <div className="create-voyage-container">
+      <h1>Add Voyage</h1>
+      {error && <p className="error-message">{error}</p>}
+      <form onSubmit={handleSubmit} className="create-voyage-form">
+        <div className="form-group">
           <label>
             Vessel Name:
             <input
@@ -91,7 +93,7 @@ const CreateVoyage = () => {
             />
           </label>
         </div>
-        <div>
+        <div className="form-group">
           <label>
             Vessel Type:
             <select value={vesselType} onChange={(e) => setVesselType(e.target.value)} required>
@@ -102,7 +104,7 @@ const CreateVoyage = () => {
             </select>
           </label>
         </div>
-        <div>
+        <div className="form-group">
           <label>
             Rank:
             <select value={rank} onChange={(e) => setRank(e.target.value)} required>
@@ -113,7 +115,7 @@ const CreateVoyage = () => {
             </select>
           </label>
         </div>
-        <div>
+        <div className="form-group">
           <label>
             IMO Number:
             <input
@@ -124,7 +126,7 @@ const CreateVoyage = () => {
             />
           </label>
         </div>
-        <div>
+        <div className="form-group">
           <label>
             Joining Port:
             <input
@@ -135,7 +137,7 @@ const CreateVoyage = () => {
             />
           </label>
         </div>
-        <div>
+        <div className="form-group">
           <label>
             Joining Date:
             <input
@@ -146,7 +148,7 @@ const CreateVoyage = () => {
             />
           </label>
         </div>
-        <div>
+        <div className="form-group">
           <label>
             Leaving Port:
             <input
@@ -156,7 +158,7 @@ const CreateVoyage = () => {
             />
           </label>
         </div>
-        <div>
+        <div className="form-group">
           <label>
             Leaving Date:
             <input
@@ -166,7 +168,7 @@ const CreateVoyage = () => {
             />
           </label>
         </div>
-        <div>
+        <div className="form-group">
           <label>
             Remarks:
             <input
@@ -176,7 +178,7 @@ const CreateVoyage = () => {
             />
           </label>
         </div>
-        <div>
+        <div className="form-group">
           <label>
             Flag:
             <input
@@ -187,8 +189,8 @@ const CreateVoyage = () => {
             />
           </label>
         </div>
-        <button type="submit" disabled={loading}>
-          {loading ? 'Creating...' : 'Create Voyage'}
+        <button type="submit" className="btn-create-voyage" disabled={loading}>
+          {loading ? 'Creating...' : 'Add Voyage'}
         </button>
       </form>
     </div>

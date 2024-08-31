@@ -139,26 +139,30 @@ const Documents = () => {
   const totalPages = Math.ceil(documents.length / documentsPerPage);
 
   const getVerificationStatus = (expiryDate) => {
-    if (!expiryDate) return 'N/A';
+    if (!expiryDate) return <span className="verification-status">N/A</span>;
 
     const expiry = new Date(expiryDate);
     const today = new Date();
     const sixMonthsInMs = 6 * 30 * 24 * 60 * 60 * 1000; // Roughly 6 months
 
     if (today > expiry) {
-      const timeSinceExpiry = Math.floor((today - expiry) / (1000 * 60 * 60 * 24)); // Days since expiry
-      return `Expired ${timeSinceExpiry} day(s) ago`;
+        const timeSinceExpiry = Math.floor((today - expiry) / (1000 * 60 * 60 * 24)); // Days since expiry
+        return <span className="verification-status expired">Expired {timeSinceExpiry} day(s) ago</span>;
     } else if (expiry - today <= sixMonthsInMs) {
-      const timeToExpiry = Math.floor((expiry - today) / (1000 * 60 * 60 * 24)); // Days to expiry
-      return `Expiring in ${timeToExpiry} day(s)`;
+        const timeToExpiry = Math.floor((expiry - today) / (1000 * 60 * 60 * 24)); // Days to expiry
+        return <span className="verification-status expiring">Expiring in {timeToExpiry} day(s)</span>;
     } else {
-      const timeToExpiry = Math.floor((expiry - today) / (1000 * 60 * 60 * 24)); // Days to expiry
-      return `Valid for ${timeToExpiry} day(s)`;
+        const timeToExpiry = Math.floor((expiry - today) / (1000 * 60 * 60 * 24)); // Days to expiry
+        return <span className="verification-status valid">Valid for {timeToExpiry} day(s)</span>;
     }
-  };
+};
 
-  const handleRowClick = (documentId) => {
-    navigate(`/documents/${documentId}/update`);
+
+  const handleRowClick = (e, documentId) => {
+    // Ensure that the click didn't happen on a checkbox
+    if (e.target.type !== 'checkbox') {
+      navigate(`/documents/${documentId}/update`);
+    }
   };
 
   if (loading) {
@@ -174,10 +178,10 @@ const Documents = () => {
       <h1>Documents</h1>
       <div className="document-buttons">
         <button onClick={downloadSelectedImages} className="btn-download-selected" disabled={!selectedDocuments.length}>
-          Download Selected
+          <i className="fa-solid fa-file-arrow-down"></i> Download Selected
         </button>
         <button onClick={navigateToCreateDocument} className="btn-create-document">
-          Create Document
+          <i className="fa-solid fa-plus"></i> Create Document
         </button>
       </div>
 
@@ -202,7 +206,11 @@ const Documents = () => {
           </thead>
           <tbody>
             {currentDocuments.map((document) => (
-              <tr key={document.id} className="document-row" onClick={() => handleRowClick(document.id)}>
+              <tr
+                key={document.id}
+                className="document-row"
+                onClick={(e) => handleRowClick(e, document.id)}
+              >
                 <td>
                   <input
                     type="checkbox"

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
 
-
 .profile-body {
+    font-family: 'Oswald', sans-serif;
     min-height: calc(100vh - 40px); /* Full height minus any top/bottom padding */
     padding: 50px 0; /* Adds padding to the top and bottom of the entire profile body */
     display: flex;
@@ -29,6 +29,7 @@
 
 .personal-information h2,
 .additional-information h2 {
+    margin-top: 0px;
     margin-bottom: 10px;
     color: #003366; /* Updated font color */
     border-bottom: 2px solid #003366; /* Updated border color */
@@ -71,6 +72,80 @@ input[type="number"] {
 
 .form-group-inline div {
     width: 90%;
+}
+
+.image-preview-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.image-preview {
+    max-width: 100%;
+    height: auto;
+    border-radius: 7px;
+}
+
+.change-image-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    color: #003366;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    opacity: 0;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.change-image-button i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.image-preview-container:hover .change-image-button {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.7); /* Transparent white on hover */
+}
+
+.profile-image-upload-placeholder {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 25vh;
+    padding: 20px;
+    border: 2px dashed #4774e6;
+    border-radius: 7px;
+    background-color: #fff;
+    text-align: center;
+    color: #003366;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.profile-image-upload-placeholder h3 {
+    color: #003366;
+}
+
+.profile-image-upload-placeholder:hover {
+    background-color: #f0f8ff;
+}
+
+.upload-icon {
+    font-size: 24px;
+    margin-right: 5px;
 }
 
 .buttons {
@@ -122,10 +197,13 @@ input[type="number"] {
 
 /* Responsive Design */
 
-@media (max-width: 768px) {
-    form {
+@media (max-width: 840px) {
+    .profile-body {
+        padding: 40px 0px;
+    }
+
+    .profile-body form {
         width: 90%;
-        margin:auto;
         padding: 15px;
     }
 

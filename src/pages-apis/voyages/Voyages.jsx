@@ -1,17 +1,20 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import Loading from '../../components-redo/Loading';
 
 const Voyages = () => {
   const [voyages, setVoyages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [voyagesPerPage, setVoyagesPerPage] = useState(10);
+  const [loading, setLoading] = useState(true); // Added loading state
   const { userId, accessToken } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchVoyages = async () => {
       if (!userId || !accessToken) {
+        setLoading(false); // Stop loading if user is not authenticated
         return;
       }
 
@@ -27,9 +30,13 @@ const Voyages = () => {
         if (response.ok) {
           const data = await response.json();
           setVoyages(data);
+        } else {
+          console.error('Failed to fetch voyages');
         }
       } catch (err) {
         console.error('Error fetching voyages:', err);
+      } finally {
+        setLoading(false); // Stop loading after fetch is complete
       }
     };
 
@@ -59,11 +66,15 @@ const Voyages = () => {
 
   const totalPages = Math.ceil(voyages.length / voyagesPerPage);
 
+  if (loading) {
+    return <Loading />; // Render the Loading component while loading
+  }
+
   return (
     <div className="voyages-container">
       <h1>Voyages</h1>
-      <button onClick={handleAddNewVoyage} className="btn btn-add-voyage">Add New Voyage</button>
-      
+      <button onClick={handleAddNewVoyage} className="btn btn-add-voyage"><i className="fa-solid fa-plus"></i> Add Voyage</button>
+
       <div className="voyages-table-container">
         <table className="voyages-table">
           <thead>
@@ -99,7 +110,6 @@ const Voyages = () => {
         </table>
       </div>
 
-      {/* Render cards instead of table in responsive view */}
       <div className="voyages-cards-container">
         {currentVoyages.map((voyage) => (
           <div key={voyage.id} className="voyage-card">
@@ -143,7 +153,7 @@ const Voyages = () => {
               <span className="voyage-card-label">Flag:</span>
               <span className="voyage-card-value">{voyage.flag}</span>
             </div>
-            <button onClick={() => handleEdit(voyage)} className="voyage-card-edit-btn">Edit Voyage</button>
+            <button onClick={() => handleEdit(voyage)} className="voyage-card-edit-btn">Update</button>
           </div>
         ))}
       </div>

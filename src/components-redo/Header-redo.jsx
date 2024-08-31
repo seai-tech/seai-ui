@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';  // Assuming the context is in a 'context' folder
+import { AuthContext } from '../context/AuthContext';
 import logo from '../assets/seai-white-logo.png';
 import logo2 from '../assets/seai-blue-logo.png';
 
@@ -18,32 +18,34 @@ const Header = () => {
   }, [location]);
 
   return (
-    <nav className="header">
-      <ul className="nav-links">
-        <li className="nav-button" onClick={openNav}>
-          <i className="fa-solid fa-bars menu-icon"></i>
-        </li>
-        <li className="logo-container">
-          <Link to="/">
-            <img src={logo} alt="logo" className="logo" />
-          </Link>
-        </li>
-      </ul>
+    <>
+      <nav className="header">
+        <ul className="nav-links">
+          <li className="nav-button" onClick={openNav}>
+            <i className="fa-solid fa-bars menu-icon"></i>
+          </li>
+          <li className="logo-container">
+            <Link to="/">
+              <img src={logo} alt="logo" className="logo" />
+            </Link>
+          </li>
+        </ul>
+      </nav>
 
       {/* Side navigation */}
       <div className={`side-nav ${navOpen ? 'open' : ''}`}>
-        <a href="javascript:void(0)" className="closebtn" onClick={closeNav}>
-        <i class="fa-solid fa-x"></i>
-        </a>
-        <a href="/documents" className="side-nav-link">Smart Scanner</a>
-        <Link to='/profile' className="side-nav-link">Profile</Link>
-        <a href="/documents" className="side-nav-link">Documents</a>
-        <Link to='/voyages' className="side-nav-link">Voyages</Link>
-        <a href="#" className="side-nav-link">Booking</a>
-        <a href="#" className="side-nav-link">Chat</a>
-        <a href="#" className="side-nav-link">Events</a>
-        <a href="#" className="side-nav-link">Maritime Administration</a>
-        <a href="#" className="side-nav-link">Information</a>
+        <button className="closebtn" onClick={closeNav}>
+          <i className="fa-solid fa-x"></i>
+        </button>
+        <Link to="/documents" className="side-nav-link">Smart Scanner</Link>
+        <Link to="/profile" className="side-nav-link">Profile</Link>
+        <Link to="/documents" className="side-nav-link">Documents</Link>
+        <Link to="/voyages" className="side-nav-link">Voyages</Link>
+        <Link to="#" className="side-nav-link">Booking</Link>
+        <Link to="#" className="side-nav-link">Chat</Link>
+        <Link to="#" className="side-nav-link">Events</Link>
+        <Link to="#" className="side-nav-link">Maritime Administration</Link>
+        <Link to="#" className="side-nav-link">Information</Link>
         <div className="auth-links">
           {isAuthenticated ? (
             <button className="side-nav-link" onClick={logout}>
@@ -57,7 +59,10 @@ const Header = () => {
           <img src={logo2} alt="logo" className="side-nav-logo" />
         </Link>
       </div>
-    </nav>
+
+      {/* Overlay */}
+      <div className={`side-nav-overlay ${navOpen ? 'visible' : ''}`} onClick={closeNav}></div>
+    </>
   );
 };
 

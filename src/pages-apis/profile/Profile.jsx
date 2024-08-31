@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { vesselTypeOptions, rankOptions } from '../../constants';
 import jsPDF from 'jspdf';
+import Loading from '../../components-redo/Loading';
 
 const Profile = () => {
   const { userId, accessToken, email } = useContext(AuthContext);
@@ -22,6 +23,9 @@ const Profile = () => {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState('');
+  const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -62,6 +66,14 @@ const Profile = () => {
       ...userData,
       [name]: value,
     });
+  };
+
+  const handleImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setImage(file);
+      setImagePreview(URL.createObjectURL(file));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -136,7 +148,7 @@ const Profile = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (error) {
@@ -148,7 +160,35 @@ const Profile = () => {
       <form onSubmit={handleSubmit}>
         <div className="personal-information">
           <h2>Personal Information <i className="fa-solid fa-user"></i></h2>
-          
+
+          {/* Profile Picture Upload */}
+          <div className="image-preview-container">
+            {imagePreview ? (
+              <>
+                <img src={imagePreview} alt="Profile Preview" className="image-preview" />
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current.click()}
+                  className="change-image-button"
+                >
+                  <i className="fas fa-camera"></i> Change Photo
+                </button>
+              </>
+            ) : (
+              <div className="profile-image-upload-placeholder" onClick={() => fileInputRef.current.click()}>
+                <i className="fa-solid fa-upload upload-icon"></i>&nbsp;<h3>Upload Photo</h3>
+              </div>
+            )}
+            <input
+              type="file"
+              ref={fileInputRef}
+              accept="image/*"
+              onChange={handleImageChange}
+              style={{ display: 'none' }}
+            />
+          </div>
+
+          {/* Other Personal Information Fields */}
           <div className="form-group-inline">
             <div>
               <label htmlFor="firstName">First name:</label>
@@ -313,9 +353,9 @@ const Profile = () => {
         </div>
 
         <div className="buttons">
-          <button type="submit" className="btn btn-update">Update <i className="fa-solid fa-pen-to-square"></i></button>
-          <button type="button" onClick={handleDelete} className="btn btn-delete">Delete <i className="fa-solid fa-delete-left"></i></button>
-          <button type="button" onClick={handleDownloadPDF} className="btn btn-download">Download <i className="fa-solid fa-file-arrow-down"></i></button>
+          <button type="submit" className="btn btn-update"><i className="fa-solid fa-pen-to-square"></i> Update</button>
+          <button type="button" onClick={handleDelete} className="btn btn-delete"><i className="fa-solid fa-delete-left"></i> Delete</button>
+          <button type="button" onClick={handleDownloadPDF} className="btn btn-download"><i className="fa-solid fa-file-arrow-down"></i> Download</button>
         </div>
       </form>
     </div>
