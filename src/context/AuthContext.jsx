@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
     setAccessToken(newAccessToken);
     setEmail(newEmail);
     setIsAuthenticated(true);
-    navigate('/profile');
+    navigate('/menu');
   };
 
   const logout = () => {

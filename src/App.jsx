@@ -8,6 +8,7 @@ import About from './pages-apis/base/About';
 import Contact from './pages-apis/base/Contact';
 import Login from './pages-apis/login-register/Login';
 import Register from './pages-apis/login-register/Register';
+import Menu from './pages-apis/base/Menu';
 import Profile from './pages-apis/profile/Profile';
 import Voyages from './pages-apis/voyages/Voyages';
 import VoyageCreate from './pages-apis/voyages/VoyageCreate';
@@ -38,6 +39,8 @@ function App() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        <Route path="/menu" element ={<PrivateRoute><Menu/></PrivateRoute>}/>
 
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
 
