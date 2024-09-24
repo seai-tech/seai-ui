@@ -44,7 +44,7 @@ const CreateDocument = () => {
       const documentResponse = await fetch(`https://api.seai.co/api/v1/users/${userId}/documents`, {
         method: 'POST',
         headers: {
-          
+          'Authorization': `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(documentData),
