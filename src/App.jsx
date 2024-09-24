@@ -13,6 +13,8 @@ import Voyages from './pages-apis/voyages/Voyages';
 import VoyageCreate from './pages-apis/voyages/VoyageCreate';
 import VoyageUpdate from './pages-apis/voyages/VoyageUpdate';
 import Documents from './pages-apis/documents/Documents';
+import DocumentScan from './pages-apis/documents/DocumentScan';
+import DocumentVerify from './pages-apis/documents/DocumentVerify';
 import DocumentUpdate from './pages-apis/documents/DocumentUpdate';
 import DocumentCreate from './pages-apis/documents/DocumentCreate';
 import PrivateRoute from './private-route/PrivateRoute';
@@ -48,7 +50,9 @@ function App() {
         <Route path="/documents" element={<PrivateRoute><Documents /></PrivateRoute>} />
         <Route path="/documents/create" element={<PrivateRoute><DocumentCreate /></PrivateRoute>} />
         <Route path="/documents/:documentId/update" element={<PrivateRoute><DocumentUpdate /></PrivateRoute>} />
-
+        <Route path="/documents/:documentId/verify" element={<PrivateRoute><DocumentVerify /></PrivateRoute>} />
+        <Route path="/scanner" element={<PrivateRoute><DocumentScan /></PrivateRoute>} />
+       
         <Route path="/*" element={<Error />} />
       </Routes>
       <Footer />
