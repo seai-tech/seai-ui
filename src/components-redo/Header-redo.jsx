@@ -37,7 +37,7 @@ const Header = () => {
         <button className="closebtn" onClick={closeNav}>
           <i className="fa-solid fa-x"></i>
         </button>
-        <Link to="/documents" className="side-nav-link">Smart Scanner</Link>
+        <Link to="/scanner" className="side-nav-link">Smart Scanner</Link>
         <Link to="/profile" className="side-nav-link">Profile</Link>
         <Link to="/documents" className="side-nav-link">Documents</Link>
         <Link to="/voyages" className="side-nav-link">Voyages</Link>

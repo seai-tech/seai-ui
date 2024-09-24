@@ -99,7 +99,7 @@ const Profile = () => {
         throw new Error('Failed to update user data');
       }
 
-      navigate('/'); // Navigate back to the profile page after updating
+      navigate('/profile'); // Navigate back to the profile page after updating
     } catch (err) {
       setError(err.message);
     }
