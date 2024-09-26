@@ -162,8 +162,11 @@
     opacity: 1;
     visibility: visible;
   }
-  
-  
+
+  .no-scroll {
+    overflow: hidden;
+  }
+
   /* Responsive design adjustments */
   @media (max-width: 768px) {
     .side-nav-overlay {

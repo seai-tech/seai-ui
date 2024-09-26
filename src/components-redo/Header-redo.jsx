@@ -9,8 +9,15 @@ const Header = () => {
   const { isAuthenticated, logout } = useContext(AuthContext);
   const location = useLocation();
 
-  const openNav = () => setNavOpen(true);
-  const closeNav = () => setNavOpen(false);
+  const openNav = () => {
+    setNavOpen(true);
+    document.body.classList.add('no-scroll'); // Disable scroll
+  };
+
+  const closeNav = () => {
+    setNavOpen(false);
+    document.body.classList.remove('no-scroll'); // Enable scroll
+  };
 
   useEffect(() => {
     // Close the side menu if the user navigates to a different page
