@@ -95,7 +95,7 @@ const Voyages = () => {
               <th>Leaving Date</th>
               <th>Remarks</th>
               <th>Flag</th>
-              <th>Attach file</th>
+              <th>Files</th>
             </tr>
           </thead>
           <tbody>
