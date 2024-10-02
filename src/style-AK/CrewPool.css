@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+.crew-pool-container {
+    font-family: 'Oswald', sans-serif;
+    min-height: calc(100vh - 40px); /* Full height minus any top/bottom padding */
+    padding: 50px 50px; /* Adds padding to the top and bottom of the entire profile body */
+    
+    justify-content: center;
+    align-items: center;
+}
+
+.crew-pool-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.crew-pool-filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.crew-pool-filter-item {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.crew-pool-filter-item:last-child {
+    margin-right: 0;
+}
+
+label {
+    color: #003366; /* Updated font color */
+    display: block;
+    margin-bottom: 5px;
+}
+
+.scrollable-list {
+    height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.scrollable-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.scrollable-list li {
+    margin-bottom: 10px;
+}
+
+select {
+    width: 100%;
+    padding: 5px;
+}
+
+/* GO Button */
+.go-reset-button-container {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    gap:10px;
+    justify-content: space-around;
+}
+
+#go-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+#go-button:hover {
+    background-color: #218838;
+}
+
+#reset-button{
+    background-color:#4774e6 ;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+#reset-button:hover{
+    background-color: navy;
+}
+
+
+/* Crew Table */
+.crew-table {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.crew-table table{
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+.crew-table thead {
+    background-color: #f2f2f2;
+}
+
+.crew-table th{
+    background-color: #4774e6;
+    /* Blue background color */
+    color: #fff;
+    /* White font color */
+    padding: 10px;
+    text-align: left;
+    font-size: 18px; 
+}
+.crew-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #4774e6;
+    font-size: 16px;
+}
+
+.crew-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.crew-pool-searchbox{
+    height: auto;
+    width: 40vw;
+    display: flex;
+    cursor: pointer;
+    padding: 10px 20px;
+    background: #fff;
+    border-radius: 30px;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10vh;
+  }
+
+  .crew-pool-searchbox:hover input{
+  width: 60vw;
+  }
+  
+.crew-pool-searchbox input{
+    width: 0;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    transition: 0.8s;
+    background: transparent;
+  }
+  
+  .crew-pool-searchbox a .fas{
+    color:#2E5EAA;
+    font-size: 18px;
+  }
+
+
+

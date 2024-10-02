@@ -6,7 +6,7 @@ import Loading from '../../components-redo/Loading';
 const Voyages = () => {
   const [voyages, setVoyages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [voyagesPerPage, setVoyagesPerPage] = useState(10);
+  const [voyagesPerPage, setVoyagesPerPage] = useState(25);
   const [loading, setLoading] = useState(true); // Added loading state
   const { userId, accessToken } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -29,7 +29,10 @@ const Voyages = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setVoyages(data);
+          
+          // Sort voyages by joining date, newest first
+          const sortedVoyages = data.sort((a, b) => new Date(b.joiningDate) - new Date(a.joiningDate));
+          setVoyages(sortedVoyages);
         } else {
           console.error('Failed to fetch voyages');
         }
@@ -73,12 +76,15 @@ const Voyages = () => {
   return (
     <div className="voyages-container">
       <h1>Voyages</h1>
-      <button onClick={handleAddNewVoyage} className="btn btn-add-voyage"><i className="fa-solid fa-plus"></i> Add Voyage</button>
+      <button onClick={handleAddNewVoyage} className="btn btn-add-voyage">
+        <i className="fa-solid fa-plus"></i> Add Voyage
+      </button>
 
       <div className="voyages-table-container">
         <table className="voyages-table">
           <thead>
             <tr>
+              <th>#</th>
               <th>Vessel Name</th>
               <th>Vessel Type</th>
               <th>Rank</th>
@@ -89,11 +95,14 @@ const Voyages = () => {
               <th>Leaving Date</th>
               <th>Remarks</th>
               <th>Flag</th>
+              <th>Attach file</th>
             </tr>
           </thead>
           <tbody>
-            {currentVoyages.map((voyage) => (
+            {currentVoyages.map((voyage, index) => (
               <tr key={voyage.id} onClick={() => handleEdit(voyage)} className="voyage-row">
+                {/* Adjust the numbering so the newest voyage has the largest number */}
+                <td>{voyages.length - (indexOfFirstVoyage + index)}</td>
                 <td>{voyage.vesselName}</td>
                 <td>{voyage.vesselType}</td>
                 <td>{voyage.rank}</td>
@@ -104,6 +113,11 @@ const Voyages = () => {
                 <td>{voyage.leavingDate ? new Date(voyage.leavingDate).toLocaleDateString() : 'N/A'}</td>
                 <td>{voyage.remarks}</td>
                 <td>{voyage.flag}</td>
+                <td>
+                <button className="btn attach-file-btn">
+                  Attach File
+                </button>
+              </td>
               </tr>
             ))}
           </tbody>
@@ -111,8 +125,13 @@ const Voyages = () => {
       </div>
 
       <div className="voyages-cards-container">
-        {currentVoyages.map((voyage) => (
+        {currentVoyages.map((voyage, index) => (
           <div key={voyage.id} className="voyage-card">
+            <div className="voyage-card-item">
+              <span className="voyage-card-label">Voyage #:</span>
+              {/* Adjust the numbering for the cards as well */}
+              <span className="voyage-card-value">{voyages.length - (indexOfFirstVoyage + index)}</span>
+            </div>
             <div className="voyage-card-item">
               <span className="voyage-card-label">Vessel Name:</span>
               <span className="voyage-card-value">{voyage.vesselName}</span>
@@ -152,6 +171,11 @@ const Voyages = () => {
             <div className="voyage-card-item">
               <span className="voyage-card-label">Flag:</span>
               <span className="voyage-card-value">{voyage.flag}</span>
+            </div>
+            <div className="voyage-card-item">
+            <button className="btn attach-file-btn">
+                  Attach File
+                </button>
             </div>
             <button onClick={() => handleEdit(voyage)} className="voyage-card-edit-btn">Update</button>
           </div>
