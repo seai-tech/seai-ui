@@ -46,6 +46,15 @@ const Voyages = () => {
     fetchVoyages();
   }, [userId, accessToken]);
 
+  //function to format the date - dd/mm/yyy
+  const formatDate = (dateString) =>{
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth()+1).padStart(2,'0');
+    const year =date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
   const handleEdit = (voyage) => {
     navigate(`/voyages/${voyage.id}/update`, { state: { voyage } });
   };
@@ -108,9 +117,9 @@ const Voyages = () => {
                 <td>{voyage.rank}</td>
                 <td>{voyage.imoNumber}</td>
                 <td>{voyage.joiningPort}</td>
-                <td>{new Date(voyage.joiningDate).toLocaleDateString()}</td>
+                <td>{formatDate(voyage.joiningDate)}</td>
                 <td>{voyage.leavingPort}</td>
-                <td>{voyage.leavingDate ? new Date(voyage.leavingDate).toLocaleDateString() : 'N/A'}</td>
+                <td>{voyage.leavingDate ? formatDate(voyage.leavingDate) : 'N/A'}</td>
                 <td>{voyage.remarks}</td>
                 <td>{voyage.flag}</td>
                 <td>
@@ -154,7 +163,8 @@ const Voyages = () => {
             </div>
             <div className="voyage-card-item">
               <span className="voyage-card-label">Joining Date:</span>
-              <span className="voyage-card-value">{new Date(voyage.joiningDate).toLocaleDateString()}</span>
+              {/* Use formatDate function here */}
+              <span className="voyage-card-value">{formatDate(voyage.joiningDate)}</span>
             </div>
             <div className="voyage-card-item">
               <span className="voyage-card-label">Leaving Port:</span>
@@ -162,7 +172,7 @@ const Voyages = () => {
             </div>
             <div className="voyage-card-item">
               <span className="voyage-card-label">Leaving Date:</span>
-              <span className="voyage-card-value">{voyage.leavingDate ? new Date(voyage.leavingDate).toLocaleDateString() : 'N/A'}</span>
+              <span className="voyage-card-value">{voyage.leavingDate ? formatDate(voyage.leavingDate) : 'N/A'}</span>
             </div>
             <div className="voyage-card-item">
               <span className="voyage-card-label">Remarks:</span>
