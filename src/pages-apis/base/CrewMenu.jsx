@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import React, { useState, useEffect, useContext } from 'react';
 
-const Menu = ()=>{
+const CrewMenu = ()=>{
     const { isAuthenticated, logout } = useContext(AuthContext);
 
     return(
@@ -33,4 +33,4 @@ const Menu = ()=>{
 
 };
 
-export default Menu;
+export default CrewMenu;

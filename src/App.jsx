@@ -8,7 +8,7 @@ import About from './pages-apis/base/About';
 import Contact from './pages-apis/base/Contact';
 import Login from './pages-apis/login-register/Login';
 import Register from './pages-apis/login-register/Register';
-import CrewMenu from './pages-apis/base/Menu';
+import CrewMenu from './pages-apis/base/CrewMenu';
 import ManningMenu from './/pages-apis/base/ManningMenu';
 import TrainingCenterMenu from './/pages-apis/base/TrainingCenterMenu';
 import Profile from './pages-apis/profile/Profile';
