@@ -43,10 +43,9 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         <Route path="/crew-menu" element ={<PrivateRoute><CrewMenu/></PrivateRoute>}/>
-        {/*<Route path="/manning-menu" element ={<PrivateRoute><ManningMenu/></PrivateRoute>}/>
-        <Route path="/training-center-menu" element ={<PrivateRoute><TrainingCenterMenu/></PrivateRoute>}/>
+        
 
-        <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />*/}
+        <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
 
         <Route path="/voyages" element={<PrivateRoute><Voyages /></PrivateRoute>} />
         <Route path="/voyages/create" element={<PrivateRoute><VoyageCreate /></PrivateRoute>} />

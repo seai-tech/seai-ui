@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import React, { useState, useEffect, useContext } from 'react';
 
-const CrewMenu = ()=>{
+const Menu = ()=>{
     const { isAuthenticated, logout } = useContext(AuthContext);
 
     return(
@@ -22,15 +22,15 @@ const CrewMenu = ()=>{
             <Link to="#" className="menu-page-link">Events</Link>
             <Link to="#" className="menu-page-link">Maritime Administration</Link>
             <Link to="#" className="menu-page-link">Information</Link>
-
+           
             <button className="menu-page-logout" onClick={logout}>Logout</button>
-
-
-
+                
+            
+            
         </div>
         </>
     )
 
 };
 
-export default CrewMenu;
+export default Menu;
