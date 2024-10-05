@@ -23,9 +23,6 @@ import PrivateRoute from './private-route/PrivateRoute';
 import Loading from './components-redo/Loading';
 import Error from './components-redo/Error';
 
-
-import CrewPool from './manning agent ui/CrewPool';
-
 function App() {
   return (
     <div>
@@ -59,7 +56,7 @@ function App() {
         <Route path="/documents/create" element={<PrivateRoute><DocumentCreate /></PrivateRoute>} />
         <Route path="/documents/:documentId/update" element={<PrivateRoute><DocumentUpdate /></PrivateRoute>} />
 
-        <Route path="/crew-pool" element={<PrivateRoute><CrewPool /></PrivateRoute>} />
+        {/*<Route path="/crew-pool" element={<PrivateRoute><CrewPool /></PrivateRoute>} />*/}
         <Route path="/*" element={<Error />} />
       </Routes>
       <Footer />
