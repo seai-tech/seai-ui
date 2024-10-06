@@ -1,10 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
-
 .crew-pool-container {
     font-family: 'Oswald', sans-serif;
     min-height: calc(100vh - 40px); /* Full height minus any top/bottom padding */
-    padding: 50px 50px; /* Adds padding to the top and bottom of the entire profile body */
-    
+    padding: 50px; /* Default padding */
     justify-content: center;
     align-items: center;
 }
@@ -70,12 +68,12 @@ select {
 #go-button {
     background-color: #28a745;
     color: white;
-    padding: 10px 20px;
+    padding: auto;
     border: none;
     cursor: pointer;
     font-family: 'Oswald', sans-serif;
     border: 1px solid #218838;
-    width: 10vw;
+    width: auto;
 }
 
 #go-button:hover {
@@ -85,12 +83,12 @@ select {
 #reset-button{
     background-color:#4774e6 ;
     color: #fff;
-    padding: 10px 20px;
+    padding: auto;
     border: none;
     cursor: pointer;
     font-family: 'Oswald', sans-serif;
     border: 1px solid #003366;
-    width: 10vw;
+    width: auto;
 
 }
 #reset-button:hover{
@@ -165,3 +163,138 @@ select {
     color:#2E5EAA;
     font-size: 18px;
   }
+
+/* On very small screens (below 600px) */
+@media (max-width: 600px) {
+    .crew-pool-container {
+        padding: 15px; /* Reduce padding on smaller screens */
+        overflow-x: hidden;
+    }
+
+    /* Adjust the search box to be full-width on small screens */
+    .crew-pool-searchbox {
+        width: 80%;
+    }
+
+    .crew-pool-searchbox:hover input {
+        width: 100%;
+    }
+
+    .crew-pool-searchbox input {
+        width: 100%;
+    }
+
+    /* Stack filters vertically for smaller screens */
+    .crew-pool-filters {
+        flex-direction: column;
+        gap: 15px; /* Add gap between stacked filter items */
+    }
+
+    .crew-pool-filter-item {
+        margin-right: 0;
+        width: 100%;
+    }
+    .go-reset-button-container{
+        display: block;
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: center;
+        gap: 10px; /* Space between buttons */
+    }
+
+    /* Reduce button sizes on smaller screens */
+    .go-reset-button-container button {
+        width: 45%;
+        font-size: 14px; /* Reduce font size for buttons */
+        padding: 8px 12px; /* Smaller padding */
+    }
+
+    /* Adjust the card items to make them more readable on very small screens */
+    .crew-pool-card-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .crew-pool-card-label {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .crew-pool-card-value {
+        font-size: 14px;
+    }
+}
+
+/* On medium screens (between 600px and 900px) */
+@media (max-width: 900px) {
+    .crew-pool-container {
+        padding: auto;
+        overflow-x: hidden;
+    }
+
+    /* Keep the current styling for filters and cards */
+    .crew-pool-filters {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .crew-pool-filter-item {
+        width: 100%;
+        margin-right: 0;
+    }
+    .go-reset-button-container{
+        display: block;
+        gap: 10vw;
+        
+    }
+
+    .go-reset-button-container button {
+        width: 45%;
+        font-size: 16px;
+    }
+
+    /* Hide the table on medium screens as well */
+    .crew-table {
+        display: none;
+    }
+
+    /* Adjust card styling */
+    .crew-pool-cards-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .crew-pool-card {
+        border: 1px solid #4774e6;
+        border-radius: 5px;
+        padding: 15px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .crew-pool-card-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .crew-pool-card-label {
+        font-weight: bold;
+        color: #003366;
+    }
+
+    .crew-pool-card-value {
+        color: #003366;
+    }
+}
+
+/* For large screens, keeping the original design */
+@media (min-width: 900px) {
+    .crew-table {
+        display: table;
+    }
+
+    .crew-pool-cards-container {
+        display: none;
+    }
+}

@@ -113,6 +113,56 @@ const CrewPool =()=>{
                 </tbody>
             </table>
         </div>
+
+        <div className="crew-pool-cards-container">
+        <div className="crew-pool-card">
+                    <div className="crew-pool-card-item">
+                    <span className="crew-pool-card-label">Fleet: </span>
+                    <span className="crew-pool-card-value">Fleet 1</span>
+                    </div>
+                    <div className="crew-pool-card-item">
+                    <span className="crew-pool-card-label">Person:</span>
+                    <span className="crew-pool-card-value">Person 1</span>
+                    </div>
+                    <div className="crew-pool-card-item">
+                    <span className="crew-pool-card-label">Rank: </span>
+                    <span className="crew-pool-card-value">Rank 1</span>
+                    </div>
+                    <div className="crew-pool-card-item">
+                    <span className="crew-pool-card-label">Manning Agent: </span>
+                    <span className="crew-pool-card-value">Agent 1</span>
+                    </div>
+                    <div className="crew-pool-card-item">
+                    <span className="crew-pool-card-label">Nationality: </span>
+                    <span className="crew-pool-card-value">Nationality 1</span>
+                    </div>
+                    <div className="crew-pool-card-item">
+                    <span className="crew-pool-card-label">Last Vessel:</span>
+                    <span className="crew-pool-card-value">Last Vessel 1</span>
+                    </div>
+                    <div className="crew-pool-card-item">
+                    <span className="crew-pool-card-label">Sign Off</span>
+                    <span className="crew-pool-card-value">sign off</span>
+                    </div>
+                    <div className="crew-pool-card-item">
+                    <span className="crew-pool-card-label">Ready Join</span>
+                    <span className="crew-pool-card-value">31/12/2022</span>
+                    </div>
+                    <div className="crew-pool-card-item">
+                    <span className="crew-pool-card-label">Exp</span>
+                    <span className="crew-pool-card-value">13.19</span>
+                    </div>
+                    <div className="crew-pool-card-item">
+                    <span className="crew-pool-card-label">Next Assignment</span>
+                    <span className="crew-pool-card-value">Celeste Nova</span>
+                    </div>
+                    <div className="crew-pool-card-item">
+                    <span className="crew-pool-card-label">Remarks</span>
+                    <span className="crew-pool-card-value">no remarks</span>
+                    </div>
+                </div>
+        </div>
+        
     </div>
 </>
 )};
