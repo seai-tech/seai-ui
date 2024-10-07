@@ -12,7 +12,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/profile');
+      navigate('/menu');
     }
   }, [isAuthenticated, navigate]);
 

@@ -8,6 +8,9 @@ import About from './pages-apis/base/About';
 import Contact from './pages-apis/base/Contact';
 import Login from './pages-apis/login-register/Login';
 import Register from './pages-apis/login-register/Register';
+import CrewMenu from './pages-apis/base/CrewMenu';
+import ManningMenu from './/pages-apis/base/ManningMenu';
+import TrainingCenterMenu from './/pages-apis/base/TrainingCenterMenu';
 import Profile from './pages-apis/profile/Profile';
 import Voyages from './pages-apis/voyages/Voyages';
 import VoyageCreate from './pages-apis/voyages/VoyageCreate';
@@ -40,6 +43,10 @@ function App() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        <Route path="/crew-menu" element ={<PrivateRoute><CrewMenu/></PrivateRoute>}/>
+        <Route path="/manning-menu" element ={<PrivateRoute><ManningMenu/></PrivateRoute>}/>
+        <Route path="/training-center-menu" element ={<PrivateRoute><TrainingCenterMenu/></PrivateRoute>}/>
 
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
 
