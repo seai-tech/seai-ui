@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { saveAs } from 'file-saver';
 import Loading from '../../components-redo/Loading';
 
 const DocumentVerify = () => {
@@ -16,7 +15,6 @@ const DocumentVerify = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -157,20 +155,6 @@ const DocumentVerify = () => {
               <img src={imageUrl} alt="Document" />
             </div>
           )}
-          <button onClick={() => fileInputRef.current.click()}>
-            <i className="fas fa-camera"></i> Change Photo
-          </button>
-          <input
-            type="file"
-            ref={fileInputRef}
-            accept="image/*"
-            style={{ display: 'none' }}
-            onChange={(e) => {
-              if (e.target.files && e.target.files[0]) {
-                uploadImage(e.target.files[0]);
-              }
-            }}
-          />
         </div>
         <div className="form-container">
           <label>

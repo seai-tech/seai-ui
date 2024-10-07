@@ -1,51 +1,19 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usePhotoGallery } from '../../hooks/usePhotoGallery';
 import { AuthContext } from '../../context/AuthContext';
 import logo from '../../assets/last_logo.png';
 
 const ScanDocumentPage = () => {
     const { userId, accessToken } = useContext(AuthContext);
-    const [file, setFile] = useState(null);
-    const [imagePreview, setImagePreview] = useState('');
-    const [isCameraOpen, setIsCameraOpen] = useState(false);
-    const navigate = useNavigate();
     const fileInputRef = useRef(null);
-    const videoRef = useRef(null);
-    const canvasRef = useRef(null);
+    const navigate = useNavigate();
+    const { takePhoto } = usePhotoGallery();
 
-    const openCamera = async () => {
-        setIsCameraOpen(true);
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            videoRef.current.srcObject = stream;
-        } catch (error) {
-            console.error('Error accessing camera:', error);
-        }
-    };
-
-    const capturePhoto = () => {
-        const canvas = canvasRef.current;
-        const video = videoRef.current;
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        canvas.toBlob((blob) => {
-            const file = new File([blob], 'captured_image.jpg', { type: 'image/jpeg' });
-            setFile(file);
-            setImagePreview(URL.createObjectURL(blob));
-            setIsCameraOpen(false);
-            video.srcObject.getTracks().forEach(track => track.stop());
-            handleScan(file);
-        });
-    };
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
             const selectedFile = e.target.files[0];
-            setFile(selectedFile);
-            setImagePreview(URL.createObjectURL(selectedFile));
-
             handleScan(selectedFile);
         }
     };
@@ -79,36 +47,41 @@ const ScanDocumentPage = () => {
         }
     };
 
+    const handleCameraCapture = async () => {
+        const photoData = await takePhoto();
+        if (photoData) {
+            const response = await fetch(photoData.webPath);
+            const blob = await response.blob();
+            const file = new File([blob], 'captured_image.jpg', { type: blob.type });
+            handleScan(file);
+        }
+    };
+
     return (
-        <div className='document-scan-container'>
+        <div className="document-scan-container">
             <img src={logo} alt="" />
             <h2>Smart Scanner</h2>
 
-            <button className='btn-scanner' onClick={openCamera}>
-            <i class="fa-solid fa-camera"></i> Use Camera
+            <button
+                className="btn-scanner"
+                onClick={handleCameraCapture}
+            >
+                <i className="fa-solid fa-camera"></i> Use Camera
             </button>
 
-            {isCameraOpen && (
-                <div className="camera-container">
-                    <video ref={videoRef} autoPlay className="camera-view" />
-                    <button className='btn-scanner' onClick={capturePhoto}>
-                    <i class="fa-solid fa-bolt"></i> Take Photo
-                    </button>
-                    <canvas ref={canvasRef} style={{ display: 'none' }} />
-                </div>
-            )}
-
             <div>
-                <button className='btn-scanner' onClick={() => fileInputRef.current.click()}>
-                <i class="fa-solid fa-upload"></i> Upload Picture    
+                <button
+                    className="btn-upload"
+                    onClick={() => fileInputRef.current.click()}
+                >
+                    <i className="fa-solid fa-upload"></i> Upload Picture
                 </button>
                 <input
                     type="file"
                     accept="image/*"
-                    capture="environment"
                     onChange={handleFileChange}
                     ref={fileInputRef}
-                    style={{ display: 'none' }} // Hide the actual input field
+                    style={{ display: 'none' }}
                 />
             </div>
         </div>
