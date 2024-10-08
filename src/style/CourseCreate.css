@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+.create-document-container {
+    max-width: 760px;
+    margin: 50px auto;
+    padding: 20px;
+    font-family: 'Oswald', sans-serif;
+    color: #003366;
+    border: 1px solid #4774e6;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-document-container h1 {
+    text-align: center;
+    color: #003366;
+    margin-bottom: 20px;
+}
+
+.create-document-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group label {
+    color: #003366;
+    font-size: 18px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="number"],
+.form-group input[type="time"],
+.form-group select,
+textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #4774e6;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.btn-create-one-document {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid #4CAF50;
+    color: #4CAF50;
+    background-color: #fff;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.btn-create-one-document:hover {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .create-document-container {
+        padding: 0;
+        margin: 50px 15px;
+    }
+
+    .create-document-form {
+        padding: 0px 15px;
+    }
+
+    .btn-create-one-document {
+        width: 100%;
+        margin-top: 30px;
+        margin-bottom: 40px;
+    }
+}

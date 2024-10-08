@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [userId, setUserId] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
   const [email, setEmail] = useState(null);
+  const [userType, setUserType] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -18,36 +19,49 @@ export const AuthProvider = ({ children }) => {
     const storedUserId = localStorage.getItem('userId');
     const storedAccessToken = localStorage.getItem('accessToken');
     const storedEmail = localStorage.getItem('email');
+    const storedUserType = localStorage.getItem('userType'); // Get the stored userType
 
-    if (storedUserId && storedAccessToken && storedEmail) {
+    if (storedUserId && storedAccessToken && storedEmail && storedUserType) {
       setUserId(storedUserId);
       setAccessToken(storedAccessToken);
       setEmail(storedEmail);
+      setUserType(storedUserType);
       setIsAuthenticated(true);
     }
     setLoading(false);
   }, []);
 
-  const login = (newUserId, newAccessToken, newEmail) => {
-    localStorage.setItem('userId', newUserId);
+  const login = (newId, newAccessToken, newEmail, type) => {
+    localStorage.setItem('userId', newId);
     localStorage.setItem('accessToken', newAccessToken);
     localStorage.setItem('email', newEmail);
-    setUserId(newUserId);
+    localStorage.setItem('userType', type);
+    setUserId(newId);
     setAccessToken(newAccessToken);
     setEmail(newEmail);
+    setUserType(type);
     setIsAuthenticated(true);
-    navigate('/profile');
   };
 
   const logout = () => {
+    const previousUserType = localStorage.getItem('userType');
+
     localStorage.removeItem('userId');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('email');
+    localStorage.removeItem('userType');
+
     setUserId(null);
     setAccessToken(null);
     setEmail(null);
+    setUserType(null);
     setIsAuthenticated(false);
-    navigate('/login');
+
+    if (previousUserType === 'trainingCenter') {
+      navigate('/login/training-center');
+    } else {
+      navigate('/login/user');
+    }
   };
 
   if (loading) {
@@ -55,7 +69,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ userId, accessToken, email, isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ userId, accessToken, email, isAuthenticated, userType, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

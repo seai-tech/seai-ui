@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+.courses-container {
+    max-width: 1200px;
+    min-height: 90vh;
+    height: auto;
+    margin: auto;
+    padding: 20px;
+    font-family: 'Oswald', sans-serif;
+    color: #003366;
+}
+
+.courses-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #003366;
+}
+
+.course-item {
+    border: 1px solid #4774e6;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.course-header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    color: #003366;
+    border-radius: 3px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.course-header:hover {
+    border-radius: 3px;
+    background-color: #4774e6;
+    color: white;
+}
+
+.course-header span {
+    font-size: 22px;
+}
+
+.course-details {
+    margin-bottom: 0px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.course-details.expanded {
+    max-height: 500px;
+    opacity: 1;
+}
+
+.course-info p {
+    margin-left: 15px;
+}
+
+.course-info p strong {
+    color: #003366;
+}
+
+.course-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin: 15px;
+}
+
+.course-actions .btn-update,
+.course-actions .btn-attendees {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid;
+    transition: background-color 0.3s ease;
+}
+
+.course-actions .btn-update {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
+
+.course-actions .btn-update:hover {
+    background-color: #fff;
+    color: #4CAF50;
+}
+
+.course-actions .btn-attendees {
+    background-color:  #4774e6;
+    color: white;
+    border-color:  #4774e6;
+}
+
+.course-actions .btn-attendees:hover {
+    background-color: #fff;
+    color:  #4774e6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .courses-container {
+        padding: 0px 15px 15px;
+    }
+
+    .course-item {
+        flex-direction: column;
+    }
+
+    .course-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-update,
+    .btn-attendees {
+        width: 100%;
+    }
+}
