@@ -1,10 +1,9 @@
-import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/seai-blue-logo.png';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 
-const CrewMenu = ()=>{
+const TrainingCenterMenu = ()=>{
     const { isAuthenticated, logout } = useContext(AuthContext);
 
     return(
@@ -15,9 +14,9 @@ const CrewMenu = ()=>{
         <div className="menu-page-content">
             <Link to="/documents" className="menu-page-link">Smart Scanner</Link>
             <Link to="/profile" className="menu-page-link">Profile</Link>
-            <Link to="/documents" className="menu-page-link">Documents</Link>
-            <Link to="/voyages" className="menu-page-link">Voyages</Link>
-            <Link to="#" className="menu-page-link">Booking</Link>
+            <Link to="#" className="menu-page-link">Course Management</Link>
+            <Link to="#" className="menu-page-link">Reports</Link>
+            <Link to="#" className="menu-page-link">Crew Pool (Participants)</Link>
             <Link to="#" className="menu-page-link">Chat</Link>
             <Link to="#" className="menu-page-link">Events</Link>
             <Link to="#" className="menu-page-link">Maritime Administration</Link>
@@ -33,4 +32,4 @@ const CrewMenu = ()=>{
 
 };
 
-export default CrewMenu;
+export default TrainingCenterMenu;
