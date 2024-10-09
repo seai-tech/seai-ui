@@ -25,6 +25,9 @@ import PrivateRoute from './private-route/PrivateRoute';
 import Loading from './components-redo/Loading';
 import Error from './components-redo/Error';
 
+
+
+
 function App() {
   return (
     <div>

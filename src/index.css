@@ -20,6 +20,8 @@
 @import url('./style-AK/Documents.css');
 @import url('./style-AK/DocumentScan.css');
 
+@import url('./style-AK/CrewPool.css');
+
 
 body {
     margin: 0;
