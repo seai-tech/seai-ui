@@ -25,6 +25,9 @@ import Loading from './components-redo/Loading';
 import Error from './components-redo/Error';
 import CrewPool from './pages-apis/manning-agent-ui/CrewPool';
 
+
+
+
 function App() {
   return (
     <div>
@@ -57,16 +60,13 @@ function App() {
         <Route path="/documents" element={<PrivateRoute><Documents /></PrivateRoute>} />
         <Route path="/documents/create" element={<PrivateRoute><DocumentCreate /></PrivateRoute>} />
         <Route path="/documents/:documentId/update" element={<PrivateRoute><DocumentUpdate /></PrivateRoute>} />
-<<<<<<< HEAD
 
         <Route path="/crew-pool" element={<PrivateRoute><CrewPool /></PrivateRoute>} />
         
 
-=======
         <Route path="/documents/:documentId/verify" element={<PrivateRoute><DocumentVerify /></PrivateRoute>} />
         <Route path="/scanner" element={<PrivateRoute><DocumentScan /></PrivateRoute>} />
        
->>>>>>> 790a6a829ed39946456b47d646e7068d4fa5d28d
         <Route path="/*" element={<Error />} />
       </Routes>
       <Footer />

@@ -3,6 +3,12 @@
     font-family: 'Oswald', sans-serif;
     min-height: calc(100vh - 40px); /* Full height minus any top/bottom padding */
     padding: 50px; /* Default padding */
+
+.crew-pool-container {
+    font-family: 'Oswald', sans-serif;
+    min-height: calc(100vh - 40px); /* Full height minus any top/bottom padding */
+    padding: 50px 50px; /* Adds padding to the top and bottom of the entire profile body */
+    
     justify-content: center;
     align-items: center;
 }
@@ -74,6 +80,9 @@ select {
     font-family: 'Oswald', sans-serif;
     border: 1px solid #218838;
     width: auto;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
 }
 
 #go-button:hover {
@@ -90,6 +99,9 @@ select {
     border: 1px solid #003366;
     width: auto;
 
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
 }
 #reset-button:hover{
     background-color: navy;
@@ -126,6 +138,7 @@ select {
 .crew-table td {
     padding: 10px;
     text-align: left;
+    border-bottom: 1px solid #4774e6;
     font-size: 16px;
 }
 
@@ -298,3 +311,6 @@ select {
         display: none;
     }
 }
+}
+
+
