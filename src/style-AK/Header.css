@@ -53,50 +53,75 @@
 /* Side Navigation */
 .side-nav {
   height: 100%;
-  width: 0;
+  width: 300px; /* Full sidebar width */
   position: fixed;
   z-index: 1001;
   background-color: #fff;
   overflow-x: hidden;
-  transition: 0.1s;
+  transition: width 0.3s ease;
   padding-top: 60px;
   top: 0;
   left: 0;
   padding-bottom: 40px;
 }
 
-/* Side navigation open */
-.side-nav.open {
-  width: 300px;
+/* Collapsed sidebar */
+.side-nav.collapsed {
+  width: 80px; /* Collapsed width showing only icons */
+}
+
+/* Button to toggle collapse/expand */
+.side-nav .collapsebtn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  background-color: #fff;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 10px;
 }
 
 /* Sidebar link styling */
-.side-nav-link,
-.side-nav-link button {
-  padding: 10px;
-  margin: 10px 20px;
+.side-nav-link {
   text-align: center;
+  padding: 10px 20px;
   text-decoration: none;
-  font-size: 15px;
   color: #4774e6;
+  display: flex;
+  align-items: center;
+  transition: 0.3s ease;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 10px;
   background-color: white;
   border: 1px solid #4774e6;
-  border-radius: 5px;
-  display: block;
-  width: calc(100% - 40px);
-  box-sizing: border-box;
-  transition: 0.3s;
-  cursor: pointer;
 }
 
-/* Hover effect for sidebar links/buttons */
-.side-nav-link:hover,
-.side-nav-link button:hover {
+/* Adjust link appearance when sidebar is collapsed */
+.side-nav-link i {
+  margin-right: 10px;
+}
+
+.side-nav.collapsed .side-nav-link {
+  justify-content: center; /* Center icons when sidebar is collapsed */
+}
+
+.side-nav.collapsed .side-nav-link i {
+  margin-right: 0;
+}
+
+.side-nav.collapsed .side-nav-link span {
+  display: none; /* Hide text when collapsed */
+}
+
+/* Hover effect for sidebar links */
+.side-nav-link:hover {
   box-shadow: 0px 0px 5px 2px #003366;
   transform: scale(1.02);
 }
 
-/* Close button in the sidebar */
+/* Sidebar close button */
 .side-nav .closebtn {
   position: absolute;
   top: 0;
@@ -110,7 +135,7 @@
   cursor: pointer;
 }
 
-/* Logo at the bottom of the sidebar */
+/* Sidebar logo at the bottom */
 .side-nav .logo-link {
   position: absolute;
   left: 50%;
@@ -122,25 +147,6 @@
 /* Sidebar logo styling */
 .side-nav-logo {
   height: 9vh;
-}
-
-/* Overlay for darkening the background when the side nav is open */
-.side-nav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1001;
-  background-color: #fff;
-  overflow-x: hidden;
-  transition: 0.1s;
-  padding-top: 60px;
-  top: 0;
-  left: 0;
-  padding-bottom: 40px;
-}
-
-.side-nav.open {
-  width: 350px;
 }
 
 /* Overlay for darkening the background when the side nav is open */
@@ -157,41 +163,26 @@
   transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-/* Show the overlay when the side-nav is open */
 .side-nav-overlay.visible {
   opacity: 1;
   visibility: visible;
 }
 
-
 /* Responsive design adjustments */
 @media (max-width: 768px) {
-  .side-nav-overlay {
-    display: none;
-  }
-
-  /* Adjust logo positioning on smaller screens */
-  .logo-container {
-    left: auto;
-    right: 20px;
-    transform: none;
-  }
-
-  .nav-button {
-    order: 1;
-  }
-
   .side-nav.open {
     width: 100%;
   }
 
-  .side-nav .closebtn {
+  .side-nav.collapsed {
+    width: 80px;
+  }
+
+  .side-nav .collapsebtn {
     right: 20px;
-    top: 0;
   }
 
   .side-nav .logo-link {
     bottom: 100px;
   }
 }
-
