@@ -6,7 +6,7 @@ import Loading from '../../components-redo/Loading';
 const Voyages = () => {
   const [voyages, setVoyages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [voyagesPerPage, setVoyagesPerPage] = useState(25);
+  const [voyagesPerPage, setVoyagesPerPage] = useState(10);
   const [loading, setLoading] = useState(true); // Added loading state
   const { userId, accessToken } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -29,10 +29,7 @@ const Voyages = () => {
 
         if (response.ok) {
           const data = await response.json();
-          
-          // Sort voyages by joining date, newest first
-          const sortedVoyages = data.sort((a, b) => new Date(b.joiningDate) - new Date(a.joiningDate));
-          setVoyages(sortedVoyages);
+          setVoyages(data);
         } else {
           console.error('Failed to fetch voyages');
         }
@@ -45,15 +42,6 @@ const Voyages = () => {
 
     fetchVoyages();
   }, [userId, accessToken]);
-
-  //function to format the date - dd/mm/yyy
-  const formatDate = (dateString) =>{
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth()+1).padStart(2,'0');
-    const year =date.getFullYear();
-    return `${day}/${month}/${year}`;
-  }
 
   const handleEdit = (voyage) => {
     navigate(`/voyages/${voyage.id}/update`, { state: { voyage } });
@@ -85,15 +73,12 @@ const Voyages = () => {
   return (
     <div className="voyages-container">
       <h1>Voyages</h1>
-      <button onClick={handleAddNewVoyage} className="btn btn-add-voyage">
-        <i className="fa-solid fa-plus"></i> Add Voyage
-      </button>
+      <button onClick={handleAddNewVoyage} className="btn btn-add-voyage"><i className="fa-solid fa-plus"></i> Add Voyage</button>
 
       <div className="voyages-table-container">
         <table className="voyages-table">
           <thead>
             <tr>
-              <th>#</th>
               <th>Vessel Name</th>
               <th>Vessel Type</th>
               <th>Rank</th>
@@ -104,29 +89,21 @@ const Voyages = () => {
               <th>Leaving Date</th>
               <th>Remarks</th>
               <th>Flag</th>
-              <th>Files</th>
             </tr>
           </thead>
           <tbody>
-            {currentVoyages.map((voyage, index) => (
+            {currentVoyages.map((voyage) => (
               <tr key={voyage.id} onClick={() => handleEdit(voyage)} className="voyage-row">
-                {/* Adjust the numbering so the newest voyage has the largest number */}
-                <td>{voyages.length - (indexOfFirstVoyage + index)}</td>
                 <td>{voyage.vesselName}</td>
                 <td>{voyage.vesselType}</td>
                 <td>{voyage.rank}</td>
                 <td>{voyage.imoNumber}</td>
                 <td>{voyage.joiningPort}</td>
-                <td>{formatDate(voyage.joiningDate)}</td>
+                <td>{new Date(voyage.joiningDate).toLocaleDateString()}</td>
                 <td>{voyage.leavingPort}</td>
-                <td>{voyage.leavingDate ? formatDate(voyage.leavingDate) : 'N/A'}</td>
+                <td>{voyage.leavingDate ? new Date(voyage.leavingDate).toLocaleDateString() : 'N/A'}</td>
                 <td>{voyage.remarks}</td>
                 <td>{voyage.flag}</td>
-                <td>
-                <button className="btn attach-file-btn">
-                  Attach File
-                </button>
-              </td>
               </tr>
             ))}
           </tbody>
@@ -134,13 +111,8 @@ const Voyages = () => {
       </div>
 
       <div className="voyages-cards-container">
-        {currentVoyages.map((voyage, index) => (
+        {currentVoyages.map((voyage) => (
           <div key={voyage.id} className="voyage-card">
-            <div className="voyage-card-item">
-              <span className="voyage-card-label">Voyage #:</span>
-              {/* Adjust the numbering for the cards as well */}
-              <span className="voyage-card-value">{voyages.length - (indexOfFirstVoyage + index)}</span>
-            </div>
             <div className="voyage-card-item">
               <span className="voyage-card-label">Vessel Name:</span>
               <span className="voyage-card-value">{voyage.vesselName}</span>
@@ -163,8 +135,7 @@ const Voyages = () => {
             </div>
             <div className="voyage-card-item">
               <span className="voyage-card-label">Joining Date:</span>
-              {/* Use formatDate function here */}
-              <span className="voyage-card-value">{formatDate(voyage.joiningDate)}</span>
+              <span className="voyage-card-value">{new Date(voyage.joiningDate).toLocaleDateString()}</span>
             </div>
             <div className="voyage-card-item">
               <span className="voyage-card-label">Leaving Port:</span>
@@ -172,7 +143,7 @@ const Voyages = () => {
             </div>
             <div className="voyage-card-item">
               <span className="voyage-card-label">Leaving Date:</span>
-              <span className="voyage-card-value">{voyage.leavingDate ? formatDate(voyage.leavingDate) : 'N/A'}</span>
+              <span className="voyage-card-value">{voyage.leavingDate ? new Date(voyage.leavingDate).toLocaleDateString() : 'N/A'}</span>
             </div>
             <div className="voyage-card-item">
               <span className="voyage-card-label">Remarks:</span>
@@ -181,11 +152,6 @@ const Voyages = () => {
             <div className="voyage-card-item">
               <span className="voyage-card-label">Flag:</span>
               <span className="voyage-card-value">{voyage.flag}</span>
-            </div>
-            <div className="voyage-card-item">
-            <button className="btn attach-file-btn">
-                  Attach File
-                </button>
             </div>
             <button onClick={() => handleEdit(voyage)} className="voyage-card-edit-btn">Update</button>
           </div>
