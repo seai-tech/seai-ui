@@ -146,22 +146,25 @@ const Documents = () => {
     const sixMonthsInMs = 6 * 30 * 24 * 60 * 60 * 1000; // Roughly 6 months
 
     if (today > expiry) {
-        const timeSinceExpiry = Math.floor((today - expiry) / (1000 * 60 * 60 * 24)); // Days since expiry
-        return <span className="verification-status expired">Expired {timeSinceExpiry} day(s) ago</span>;
+      const timeSinceExpiry = Math.floor((today - expiry) / (1000 * 60 * 60 * 24)); // Days since expiry
+      return <span className="verification-status expired">Expired {timeSinceExpiry} day(s) ago</span>;
     } else if (expiry - today <= sixMonthsInMs) {
-        const timeToExpiry = Math.floor((expiry - today) / (1000 * 60 * 60 * 24)); // Days to expiry
-        return <span className="verification-status expiring">Expiring in {timeToExpiry} day(s)</span>;
+      const timeToExpiry = Math.floor((expiry - today) / (1000 * 60 * 60 * 24)); // Days to expiry
+      return <span className="verification-status expiring">Expiring in {timeToExpiry} day(s)</span>;
     } else {
-        const timeToExpiry = Math.floor((expiry - today) / (1000 * 60 * 60 * 24)); // Days to expiry
-        return <span className="verification-status valid">Valid for {timeToExpiry} day(s)</span>;
+      const timeToExpiry = Math.floor((expiry - today) / (1000 * 60 * 60 * 24)); // Days to expiry
+      return <span className="verification-status valid">Valid for {timeToExpiry} day(s)</span>;
     }
-};
+  };
 
 
-  const handleRowClick = (e, documentId) => {
-    // Ensure that the click didn't happen on a checkbox
+  const handleRowClick = (e, documentId, verified) => {
     if (e.target.type !== 'checkbox') {
-      navigate(`/documents/${documentId}/update`);
+      if (verified) {
+        navigate(`/documents/${documentId}/update`);
+      } else {
+        navigate(`/documents/${documentId}/verify`);
+      }
     }
   };
 
@@ -209,7 +212,7 @@ const Documents = () => {
               <tr
                 key={document.id}
                 className="document-row"
-                onClick={(e) => handleRowClick(e, document.id)}
+                onClick={(e) => handleRowClick(e, document.id, document.verified)}
               >
                 <td>
                   <input

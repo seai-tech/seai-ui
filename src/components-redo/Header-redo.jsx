@@ -12,6 +12,15 @@ const Header = () => {
 
   const toggleNav = () => setNavOpen(!navOpen);
   const toggleCollapse = () => setCollapsed(!collapsed); // Toggle collapsed state
+  const openNav = () => {
+    setNavOpen(true);
+    document.body.classList.add('no-scroll'); // Disable scroll
+  };
+
+  const closeNav = () => {
+    setNavOpen(false);
+    document.body.classList.remove('no-scroll'); // Enable scroll
+  };
 
   useEffect(() => {
     // Close the side menu if the user navigates to a different page
@@ -68,6 +77,15 @@ const Header = () => {
           <i className="fa-solid fa-info-circle"></i> {!collapsed && 'Information'}
         </Link>
 
+        <Link to="/scanner" className="side-nav-link">Smart Scanner</Link>
+        <Link to="/profile" className="side-nav-link">Profile</Link>
+        <Link to="/documents" className="side-nav-link">Documents</Link>
+        <Link to="/voyages" className="side-nav-link">Voyages</Link>
+        <Link to="#" className="side-nav-link">Booking</Link>
+        <Link to="#" className="side-nav-link">Chat</Link>
+        <Link to="#" className="side-nav-link">Events</Link>
+        <Link to="#" className="side-nav-link">Maritime Administration</Link>
+        <Link to="#" className="side-nav-link">Information</Link>
         <div className="auth-links">
           {isAuthenticated ? (
             <button className="side-nav-link" onClick={logout}>

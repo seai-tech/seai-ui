@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
 
 .login-body {
-    min-height: calc(60vh - 40px); /* Full height minus any top/bottom padding */
+    min-height: calc(65vh - 40px); /* Full height minus any top/bottom padding */
     padding: 50px 0; /* Adds padding to the top and bottom of the entire login body */
     display: flex;
     justify-content: center;
