@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+.create-attendee-container {
+    max-width: 760px;
+    margin: 50px auto;
+    padding: 20px;
+    font-family: 'Oswald', sans-serif;
+    color: #003366;
+    border: 1px solid #4774e6;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-attendee-container h1 {
+    text-align: center;
+    color: #003366;
+    margin-bottom: 20px;
+}
+
+.create-attendee-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group label {
+    color: #003366;
+    font-size: 18px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #4774e6;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Radio Button Styling */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-options {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.radio-options label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #003366;
+    margin-right: 15px;
+}
+
+.radio-options input[type="radio"] {
+    margin-right: 10px;
+}
+
+.btn-create-attendee {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid #4CAF50;
+    color: #4CAF50;
+    background-color: #fff;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.btn-create-attendee:hover {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .create-attendee-container {
+        padding: 0;
+        margin: 50px 15px;
+    }
+
+    .create-attendee-form {
+        padding: 0px 15px;
+    }
+
+    .radio-options {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-create-attendee {
+        width: 100%;
+        margin-top: 30px;
+        margin-bottom: 40px;
+    }
+}

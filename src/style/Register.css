@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+.register-body {
+    min-height: calc(70vh - 40px);
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-form {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 7px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    border: 1px solid #4774e6;
+    box-sizing: border-box;
+    margin: auto;
+}
+
+.register-form h1 {
+    color: #003366;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.register-form label {
+    color: #003366;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.register-form input[type="email"],
+.register-form input[type="text"],
+.register-form input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #4774e6;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+.register-form input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.register-form button {
+    padding: 10px 20px;
+    border: 1px solid #4774e6;
+    border-radius: 5px;
+    color: #4774e6;
+    background-color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.register-form button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.register-form button:hover:not(:disabled) {
+    background-color: #4774e6;
+    color: #fff;
+}
+
+.register-form p {
+    color: #003366;
+    text-align: center;
+}
+
+.register-form a {
+    color: #4774e6;
+    text-decoration: none;
+}
+
+.register-form a:hover {
+    text-decoration: underline;
+}
+
+.gdpr-container {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.gdpr-container input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.gdpr-container label {
+    color: #003366;
+    font-size: 20px;
+}
+
+.gdpr-container a {
+    color: #4774e6;
+    text-decoration: none;
+}
+
+.gdpr-container a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .register-form {
+        width: 90%;
+        margin: auto;
+        padding: 15px;
+    }
+
+    .register-form button {
+        font-size: 18px;
+        padding: 15px;
+    }
+}

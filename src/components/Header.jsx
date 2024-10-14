@@ -1,79 +1,68 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import logo from '../assets/seai_grey.png';
-import styles from '../style/Header.module.css';
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import logo from '../assets/seai-white-logo.png';
+import logo2 from '../assets/seai-blue-logo.png';
 
 const Header = () => {
   const [navOpen, setNavOpen] = useState(false);
-  const [userId, setUserId] = useState(null);
-  const navigate = useNavigate();
-  const location = useLocation(); // Hook to track the current route
+  const { isAuthenticated, logout } = useContext(AuthContext);
+  const location = useLocation();
 
-
-
-  const openNav = () =>setNavOpen(true);
-  const closeNav =()=>setNavOpen(false);
+  const openNav = () => setNavOpen(true);
+  const closeNav = () => setNavOpen(false);
 
   useEffect(() => {
-    // Check localStorage for userId and update state accordingly
-    const storedUserId = localStorage.getItem('userId');
-    setUserId(storedUserId);
-  }, [location]); // Re-run this effect every time the route changes
-
-  const handleLogout = () => {
-    localStorage.clear(); // Clear user data from localStorage
-    navigate('/'); // Navigate to the home page after logging out
-    closeNav(); //close the side nav when logging out
-  };
-
-
-  useEffect(()=>{
-    //close the side menu if the user navigates to different page
-   closeNav();
-  }, [location]) //run this effect whenever the location changes
-
-
-
+    // Close the side menu if the user navigates to a different page
+    closeNav();
+  }, [location]);
 
   return (
-    <header>
-      <img src={logo} alt="logo" className={styles.logo} /> 
-      <nav>
-        <ul className={styles.navLinks}>
-          {userId ? (
-            <>
-              <li><Link to="/profile" className={styles.navButton}>Profile</Link></li>
-              <li className={styles.navButton} onClick={openNav}>Menu</li>
-              <li><a href="/" onClick={handleLogout} className={styles.navButton}>Logout</a></li>
-            </>
-          ) : (
-            <>
-              <li><Link to="#" className={styles.navButton}>Book Demo</Link></li>
-              <li><Link to="/login" className={styles.navButton}>Log In</Link></li>
-            </>
-          )}
+    <>
+      <nav className="header">
+        <ul className="nav-links">
+          <li className="nav-button" onClick={openNav}>
+            <i className="fa-solid fa-bars menu-icon"></i>
+          </li>
+          <li className="logo-container">
+            <Link to="/">
+              <img src={logo} alt="logo" className="logo" />
+            </Link>
+          </li>
         </ul>
       </nav>
 
-      {/*side navigation*/}
-      <div className={styles.sideNav} style={{width:navOpen?'250px':'0'}}>
-      <a href="javascript:void(0)" className={styles.closebtn} onClick={closeNav}>&times;</a>
-      <Link to='/login'>Login</Link>
-      <a href="#">Smart scanner</a>
-      <Link to='/profile'>Profile</Link>
-      <a href="/documents">Documents</a>
-      <Link to='/voyages'>Voyages</Link>
-      <a href="#">Booking</a>
-      <a href="#">Chat</a>
-      <a href="#">Events</a>
-      <a href="#">Maritime Administration</a>
-      <a href="#">Information</a>
-      <a href="/" onClick={handleLogout}>Logout</a>
+      {/* Side navigation */}
+      <div className={`side-nav ${navOpen ? 'open' : ''}`}>
+        <button className="closebtn" onClick={closeNav}>
+          <i className="fa-solid fa-x"></i>
+        </button>
+        <Link to="/scanner" className="side-nav-link">Smart Scanner</Link>
+        <Link to="/profile" className="side-nav-link">Profile</Link>
+        <Link to="/documents" className="side-nav-link">Documents</Link>
+        <Link to="/voyages" className="side-nav-link">Voyages</Link>
+        <Link to="#" className="side-nav-link">Booking</Link>
+        <Link to="#" className="side-nav-link">Chat</Link>
+        <Link to="#" className="side-nav-link">Events</Link>
+        <Link to="#" className="side-nav-link">Maritime Administration</Link>
+        <Link to="#" className="side-nav-link">Information</Link>
+        <div className="auth-links">
+          {isAuthenticated ? (
+            <button className="side-nav-link" onClick={logout}>
+              Logout
+            </button>
+          ) : (
+            <Link className="side-nav-link" to="/login/user">Login</Link>
+          )}
+        </div>
+        <Link to="/" className="logo-link">
+          <img src={logo2} alt="logo" className="side-nav-logo" />
+        </Link>
       </div>
 
-      
-
-    </header>
+      {/* Overlay */}
+      <div className={`side-nav-overlay ${navOpen ? 'visible' : ''}`} onClick={closeNav}></div>
+    </>
   );
 };
 

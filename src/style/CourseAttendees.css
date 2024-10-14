@@ -1,0 +1,140 @@
+.attendees-container {
+    max-width: auto;
+    margin: auto;
+    min-height: 70vh;
+    height: auto;
+    padding: 20px;
+    font-family: 'Oswald', sans-serif;
+    color: #003366;
+}
+
+.attendees-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.btn-add-attendee {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-add-attendee:hover {
+    background-color: white;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+.attendee-tables {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.attendee-table {
+    flex: 1;
+}
+
+.attendee-table-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.attendee-table-content {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #4774e6;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.attendee-table-content th, .attendee-table-content td {
+    padding: 10px;
+    padding-right: 0;
+}
+
+.attendee-table-content th {
+    background-color: #4774e6;
+    color: white;
+    text-align: left;
+}
+
+.attendee-actions {
+    text-align: right;
+}
+
+.attendee-actions button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-approve {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+.btn-approve:hover {
+    background-color: white;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+.btn-disapprove {
+    background-color: #FFA500;
+    color: white;
+    border: 1px solid #FFA500;
+}
+
+.btn-disapprove:hover {
+    background-color: white;
+    color: #FFA500;
+    border: 1px solid #FFA500;
+}
+
+.btn-delete-attendee {
+    background-color: #f44336;
+    color: white;
+    border: 1px solid #f44336;
+}
+
+.btn-delete-attendee:hover {
+    background-color: white;
+    color: #f44336;
+    border: 1px solid #f44336;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .attendee-tables {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .attendee-actions {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .attendee-actions button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .attendee-table-content th, .attendee-table-content td {
+        padding-right: 10px;
+    }
+}

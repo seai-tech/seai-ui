@@ -1,27 +1,29 @@
-@import url('./style-AK/Loading.css');
+@import url('./style/Loading.css');
 
-@import url('./style-AK/Header.css');
-@import url('./style-AK/Footer.css');
+@import url('./style/Header.css');
+@import url('./style/Footer.css');
 
-@import url('./style-AK/Home.css');
-@import url('./style-AK/Menu.css');
+@import url('./style/Home.css');
 
-@import url('./style-AK/Profile.css');
+@import url('./style/Profile.css');
 
-@import url('./style-AK/Login.css');
-@import url('./style-AK/Register.css');
+@import url('./style/Login.css');
+@import url('./style/Register.css');
 
-@import url('./style-AK/Voyage.css');
-@import url('./style-AK/Voyages.css');
-@import url('./style-AK/VoyageCreate.css');
+@import url('./style/Voyage.css');
+@import url('./style/Voyages.css');
+@import url('./style/VoyageCreate.css');
 
-@import url('./style-AK/Document.css');
-@import url('./style-AK/DocumentCreate.css');
-@import url('./style-AK/Documents.css');
-@import url('./style-AK/DocumentScan.css');
+@import url('./style/Document.css');
+@import url('./style/DocumentCreate.css');
+@import url('./style/Documents.css');
+@import url('./style/DocumentScan.css');
 
-@import url('./style-AK/CrewPool.css');
-
+@import url('./style/Course.css');
+@import url('./style/Courses.css');
+@import url('./style/CourseCreate.css');
+@import url('./style/CourseAttendees.css');
+@import url('./style/AddAttendee.css');
 
 body {
     margin: 0;
