@@ -11,6 +11,7 @@ const CourseAttendees = () => {
     const [approvedAttendees, setApprovedAttendees] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [editedRemarks, setEditedRemarks] = useState({}); // Store edited remarks here
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -50,8 +51,12 @@ const CourseAttendees = () => {
                 }
 
                 const data = await response.json();
-                setWaitingAttendees(data.filter((attendee) => attendee.isWaiting));
-                setApprovedAttendees(data.filter((attendee) => !attendee.isWaiting));
+                // Sort attendees alphabetically by name
+                const sortedWaitingAttendees = data.filter((attendee) => attendee.isWaiting).sort((a, b) => a.name.localeCompare(b.name));
+                const sortedApprovedAttendees = data.filter((attendee) => !attendee.isWaiting).sort((a, b) => a.name.localeCompare(b.name));
+
+                setWaitingAttendees(sortedWaitingAttendees);
+                setApprovedAttendees(sortedApprovedAttendees);
                 setLoading(false);
             } catch (err) {
                 setError(err.message);
@@ -63,11 +68,20 @@ const CourseAttendees = () => {
         fetchAttendees();
     }, [accessToken, userId, courseId]);
 
-    const handleApprove = async (attendeeId, isWaiting) => {
+    const handleRemarkChange = (attendeeId, value) => {
+        setEditedRemarks((prevRemarks) => ({
+            ...prevRemarks,
+            [attendeeId]: value,
+        }));
+    };
+
+    const handleSaveRemark = async (attendeeId) => {
         try {
             const attendee = [...waitingAttendees, ...approvedAttendees].find(
                 (attendee) => attendee.id === attendeeId
             );
+
+            const updatedRemark = editedRemarks[attendeeId] || attendee.remark;
 
             const response = await fetch(`https://api.seai.co/training-centers/${userId}/courses/${courseId}/attendees/${attendeeId}`, {
                 method: 'PUT',
@@ -76,11 +90,47 @@ const CourseAttendees = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    name: attendee.name,
-                    email: attendee.email,
-                    telephone: attendee.telephone,
-                    remark: attendee.remark,
-                    isWaiting: !isWaiting,
+                    ...attendee, // Send all attendee data, including updated remarks
+                    remark: updatedRemark,
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update remark');
+            }
+
+            // Update the UI with the saved remark
+            setWaitingAttendees((prev) =>
+                prev.map((attendee) =>
+                    attendee.id === attendeeId ? { ...attendee, remark: updatedRemark } : attendee
+                )
+            );
+            setApprovedAttendees((prev) =>
+                prev.map((attendee) =>
+                    attendee.id === attendeeId ? { ...attendee, remark: updatedRemark } : attendee
+                )
+            );
+        } catch (err) {
+            setError(err.message);
+        }
+    };
+
+    const handleApprove = async (attendeeId, isWaiting) => {
+        try {
+            const attendee = [...waitingAttendees, ...approvedAttendees].find(
+                (attendee) => attendee.id === attendeeId
+            );
+
+            // Toggle the isWaiting field only
+            const response = await fetch(`https://api.seai.co/training-centers/${userId}/courses/${courseId}/attendees/${attendeeId}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ...attendee,
+                    isWaiting: !isWaiting,  // Only change this field
                 }),
             });
 
@@ -88,13 +138,14 @@ const CourseAttendees = () => {
                 throw new Error('Failed to update attendee');
             }
 
+            // Update UI
             if (isWaiting) {
-                const approved = waitingAttendees.find((attendee) => attendee.id === attendeeId);
-                setApprovedAttendees([...approvedAttendees, { ...approved, isWaiting: false }]);
+                // Move attendee from waiting to approved list
+                setApprovedAttendees([...approvedAttendees, { ...attendee, isWaiting: false }]);
                 setWaitingAttendees(waitingAttendees.filter((attendee) => attendee.id !== attendeeId));
             } else {
-                const waiting = approvedAttendees.find((attendee) => attendee.id === attendeeId);
-                setWaitingAttendees([...waitingAttendees, { ...waiting, isWaiting: true }]);
+                // Move attendee from approved to waiting list
+                setWaitingAttendees([...waitingAttendees, { ...attendee, isWaiting: true }]);
                 setApprovedAttendees(approvedAttendees.filter((attendee) => attendee.id !== attendeeId));
             }
         } catch (err) {
@@ -146,6 +197,7 @@ const CourseAttendees = () => {
                     <table className="attendee-table-content">
                         <thead>
                             <tr>
+                                <th>#</th> {/* Row Number Column */}
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
@@ -155,21 +207,38 @@ const CourseAttendees = () => {
                         </thead>
                         <tbody>
                             {waitingAttendees.length > 0 ? (
-                                waitingAttendees.map((attendee) => (
+                                waitingAttendees.map((attendee, index) => (
                                     <tr key={attendee.id}>
+                                        <td>{index + 1}.</td> {/* Display Row Number */}
                                         <td>{attendee.name}</td>
                                         <td>{attendee.email}</td>
                                         <td>{attendee.telephone || 'N/A'}</td>
-                                        <td>{attendee.remark || 'N/A'}</td>
+                                        <td>
+                                            <input
+                                                className='attendee-remark-input'
+                                                type="text"
+                                                value={editedRemarks[attendee.id] !== undefined ? editedRemarks[attendee.id] : attendee.remark || ''}
+                                                onChange={(e) => handleRemarkChange(attendee.id, e.target.value)}
+                                            />
+                                        </td>
                                         <td className="attendee-actions">
-                                            <button onClick={() => handleApprove(attendee.id, attendee.isWaiting)} className="btn-approve"><i className="fa-solid fa-plus"></i></button>
-                                            <button onClick={() => handleDelete(attendee.id)} className="btn-delete-attendee"><i className="fa-solid fa-trash"></i></button>
+                                            <button onClick={() => handleSaveRemark(attendee.id)} className="btn-save-remark">
+                                                <i className="fa-regular fa-floppy-disk"></i>
+                                            </button>
+
+                                            <button onClick={() => handleApprove(attendee.id, attendee.isWaiting)} className="btn-approve">
+                                                <i className="fa-solid fa-plus"></i>
+                                            </button>
+
+                                            <button onClick={() => handleDelete(attendee.id)} className="btn-delete-attendee">
+                                                <i className="fa-solid fa-trash"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="5">No attendees in the waiting list.</td>
+                                    <td colSpan="6">No attendees in the waiting list.</td>
                                 </tr>
                             )}
                         </tbody>
@@ -181,6 +250,7 @@ const CourseAttendees = () => {
                     <table className="attendee-table-content">
                         <thead>
                             <tr>
+                                <th>#</th> {/* Row Number Column */}
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
@@ -190,21 +260,38 @@ const CourseAttendees = () => {
                         </thead>
                         <tbody>
                             {approvedAttendees.length > 0 ? (
-                                approvedAttendees.map((attendee) => (
+                                approvedAttendees.map((attendee, index) => (
                                     <tr key={attendee.id}>
+                                        <td>{index + 1}.</td> {/* Display Row Number */}
                                         <td>{attendee.name}</td>
                                         <td>{attendee.email}</td>
                                         <td>{attendee.telephone || 'N/A'}</td>
-                                        <td>{attendee.remark || 'N/A'}</td>
+                                        <td>
+                                            <input
+                                                className='attendee-remark-input'
+                                                type="text"
+                                                value={editedRemarks[attendee.id] !== undefined ? editedRemarks[attendee.id] : attendee.remark || ''}
+                                                onChange={(e) => handleRemarkChange(attendee.id, e.target.value)}
+                                            />
+                                        </td>
                                         <td className="attendee-actions">
-                                            <button onClick={() => handleApprove(attendee.id, attendee.isWaiting)} className="btn-disapprove"><i className="fa-solid fa-minus"></i></button>
-                                            <button onClick={() => handleDelete(attendee.id)} className="btn-delete-attendee"><i className="fa-solid fa-trash"></i></button>
+                                            <button onClick={() => handleSaveRemark(attendee.id)} className="btn-save-remark">
+                                                <i className="fa-regular fa-floppy-disk"></i>
+                                            </button>
+
+                                            <button onClick={() => handleApprove(attendee.id, attendee.isWaiting)} className="btn-disapprove">
+                                                <i className="fa-solid fa-minus"></i>
+                                            </button>
+
+                                            <button onClick={() => handleDelete(attendee.id)} className="btn-delete-attendee">
+                                                <i className="fa-solid fa-trash"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="5">No approved attendees yet.</td>
+                                    <td colSpan="6">No approved attendees yet.</td>
                                 </tr>
                             )}
                         </tbody>
